@@ -1,0 +1,58 @@
+<style>
+  body { font: 12px/1.45 Inter, system-ui, sans-serif; margin: 0; padding: 16px; color: var(--figma-color-text, #1e1e1e); background: var(--figma-color-bg, #fff); }
+  h1 { font-size: 13px; margin: 0 0 4px; } p { margin: 0 0 12px; color: var(--figma-color-text-secondary, #6b6b6b); }
+  label.file { display: block; border: 1px dashed var(--figma-color-border, #ccc); border-radius: 6px; padding: 14px; text-align: center; cursor: pointer; margin-bottom: 12px; }
+  label.file:focus-within { outline: 2px solid var(--figma-color-border-selected, #0d99ff); }
+  input[type=file] { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .summary { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; margin: 0 0 12px; } .summary b { font-variant-numeric: tabular-nums; }
+  fieldset { border: 0; padding: 0; margin: 0 0 12px; display: grid; gap: 6px; } legend { font-weight: 600; margin-bottom: 4px; }
+  button { width: 100%; height: 32px; border: 0; border-radius: 6px; background: var(--figma-color-bg-brand, #0d99ff); color: var(--figma-color-text-onbrand, #fff); font-weight: 600; cursor: pointer; }
+  button:disabled { opacity: .45; cursor: default; }
+  .status { margin-top: 12px; min-height: 18px; } .error { color: var(--figma-color-text-danger, #d1202f); }
+</style>
+<h1>GapScan Importer</h1>
+<p>Adds a design system exported from GapScan to this file: variables, text and effect styles, and optionally a foundations page and components. Run it again to update; existing components are left alone.</p>
+<label class="file" id="drop">Choose a GapScan export (.figma.json)<input type="file" id="file" accept=".json,application/json"></label>
+<div class="summary" id="summary" hidden></div>
+<fieldset id="options" hidden>
+  <legend>Also create</legend>
+  <label><input type="checkbox" id="foundations" checked> Foundations page (colour swatches and text samples)</label>
+  <label><input type="checkbox" id="components" checked> Components, with a variant for each style</label>
+</fieldset>
+<button id="build" disabled>Add to this file</button>
+<div class="status" id="status" role="status"></div>
+<script>
+  let plan = null;
+  const $ = id => document.getElementById(id);
+  const row = (label, value) => `<span>${label}</span><b>${value}</b>`;
+  const escape = text => String(text).replace(/[&<>"']/g, c => '&#' + c.charCodeAt(0) + ';');
+  $('file').addEventListener('change', async () => {
+    const file = $('file').files[0];
+    $('status').textContent = ''; $('status').className = 'status';
+    try {
+      const data = JSON.parse(await file.text());
+      if (data.format !== 'gapscan-figma/1') throw new Error('This file is not a GapScan Figma export.');
+      plan = data;
+      const vars = data.collections.reduce((n, c) => n + c.variables.length, 0);
+      $('summary').innerHTML = row('Design system', escape(data.name)) + row('Variables', vars) + row('Text styles', data.textStyles.length) + row('Effect styles', data.effectStyles.length) + row('Components', data.components.length);
+      $('summary').hidden = false; $('options').hidden = false; $('build').disabled = false;
+      $('drop').firstChild.textContent = file.name;
+    } catch (error) { plan = null; $('build').disabled = true; $('status').textContent = error.message; $('status').className = 'status error'; }
+  });
+  $('build').addEventListener('click', () => {
+    $('build').disabled = true;
+    parent.postMessage({pluginMessage: {type: 'build', plan, options: {foundations: $('foundations').checked, components: $('components').checked}}}, '*');
+  });
+  onmessage = event => {
+    const msg = event.data.pluginMessage;
+    if (!msg) return;
+    if (msg.type === 'progress') $('status').textContent = msg.message;
+    if (msg.type === 'error') { $('status').textContent = msg.message; $('status').className = 'status error'; $('build').disabled = false; }
+    if (msg.type === 'done') {
+      const r = msg.result;
+      $('status').textContent = `Added ${r.variables} variables, ${r.textStyles} text styles${r.components !== undefined ? `, ${r.components} components` : ''}.` +
+        (r.skipped && r.skipped.length ? ` Already here, left as they were: ${r.skipped.join(', ')}.` : '') + (r.substituted ? ` Fonts shown in ${r.font}.` : '');
+      $('build').disabled = false;
+    }
+  };
+</script>

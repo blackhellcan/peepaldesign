@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>More tools · GapScan</title>
+  <link rel="stylesheet" href="/app/styles.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1>More tools</h1>
+      <p class="lead" id="lead">Extra things you can make from your design system.</p>
+    </div>
+  </header>
+  <section class="card" aria-labelledby="assets-title"><h2 id="assets-title">Brand assets</h2><p class="muted">Business cards, letterheads, social images, a slide template, an email layout and an email signature, made with your colours and type. Each file lists the checks it passed.</p>
+    <form id="asset-form" class="assumptions"><label>Template<select name="template" id="asset-template"></select></label><label>Brand name<input type="text" name="brandName" value="Your brand"></label><div id="asset-fields" style="display:contents"></div><button class="primary" type="submit">Generate</button></form>
+    <div id="asset-result" style="margin-top:12px"></div></section>
+</main>
+<script src="/app/common.js"></script>
+<script src="/app/tools.js"></script>
+<script src="/app/assets.js"></script>
+</body>
+</html>

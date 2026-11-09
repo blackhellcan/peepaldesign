@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Report · GapScan</title>
+  <link rel="stylesheet" href="/app/styles.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1 id="title">Migration report</h1>
+      <p class="lead verdict" id="headline">Loading…</p>
+    </div>
+  </header>
+
+  <div class="page-tabs" role="tablist" aria-label="Report">
+    <button role="tab" id="tab-report" aria-controls="view-report" data-view="report">Report</button>
+    <button role="tab" id="tab-codemod" aria-controls="view-codemod" data-view="codemod">For developers</button>
+  </div>
+
+  <div class="view" id="view-report" role="tabpanel" aria-labelledby="tab-report">
+    <section class="card verdict-card" aria-labelledby="mix-title">
+      <div class="grid stats" id="kpis"></div>
+      <h2 id="mix-title" class="visually-hidden">Effort mix</h2>
+      <div class="mix" id="mix" role="img"></div>
+      <div class="legend" id="mix-legend"></div>
+    </section>
+
+    <div class="report-layout">
+      <div class="report-main">
+        <section class="card" aria-labelledby="attention-title">
+          <h2 id="attention-title">What needs your attention</h2>
+          <div class="attention">
+            <div><h3 id="review-title">Needs a reviewer</h3><ul class="plain" id="needs-review"></ul></div>
+            <div><h3 id="breaking-title">Breaking changes</h3><ul class="plain" id="breaking"></ul></div>
+            <div><h3 id="wins-title">Quick wins</h3><ul class="plain" id="wins"></ul></div>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="items-title">
+          <div class="card-head">
+            <h2 id="items-title">Components</h2>
+            <label class="inline filter-label">Show <select id="filter">
+              <option value="all">All required work</option><option value="update">Updates</option><option value="review">Needs review</option><option value="keep">Keep</option><option value="optional">Optional additions</option>
+            </select></label>
+          </div>
+          <p class="muted card-intro">Items that need a reviewer come first, then the heaviest work. Open one to see before and after, what changes, and why it got its level.</p>
+          <div id="items"></div>
+          <p class="muted" id="optional-note" hidden></p>
+        </section>
+
+        <section class="card" aria-labelledby="plan-title">
+          <h2 id="plan-title">Plan</h2>
+          <p id="decisions"></p>
+          <h3>Effort by area</h3><div class="scale" id="areas"></div>
+          <h3>Suggested order</h3><ol id="order"></ol>
+          <h3>Not included</h3><ul id="exclusions" class="muted"></ul>
+        </section>
+      </div>
+
+      <aside class="report-side">
+        <section class="card" aria-labelledby="assume-title">
+          <h2 id="assume-title">Assumptions</h2>
+          <p class="muted fine">Change these and every number on the page is recalculated on the server.</p>
+          <form id="assumptions" class="assumptions side-form">
+            <label>Hourly rate (USD)<input type="number" name="rate" min="1" step="1"></label>
+            <label>Applications<input type="number" name="apps" min="1" step="1"></label>
+            <label>Engineers<input type="number" name="engineers" min="1" step="1"></label>
+            <label>QA allowance %<input type="number" name="qaPct" min="0" max="200" step="1"></label>
+            <button class="primary" type="submit">Recalculate</button>
+          </form>
+          <p class="muted fine" id="assume-note">Planning ranges from the 1–5 rubric, not quotes. Anything under Not included is left out.</p>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <div class="view" id="view-codemod" role="tabpanel" aria-labelledby="tab-codemod" hidden>
+    <section class="card" aria-labelledby="codemod-title">
+      <h2 id="codemod-title">Update the code automatically</h2>
+      <p class="muted">Rewrites the renames this report found (imports, props, option values and class names) for confirmed matches only. Call sites it can't change safely are listed for a person. Review the dry run, then run the script in your repository; GapScan never changes your code.</p>
+      <div class="row"><button class="primary" id="codemod-run" type="button">Dry-run on your app code</button><a class="button" id="codemod-download" href="#">Download script</a></div>
+      <div id="codemod"></div>
+    </section>
+  </div>
+</main>
+<script src="/app/common.js"></script>
+<script src="/app/gapscan.js"></script>
+</body>
+</html>

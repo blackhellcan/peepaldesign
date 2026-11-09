@@ -1,0 +1,313 @@
+{
+  "schema_version": "1.0",
+  "built_on": "2026-10-12",
+  "description": "Registry of prominent design systems, mapped to the common taxonomy. Used before any website scan: if a link matches a system here and its record is fresh, use the stored data instead of scanning.",
+  "taxonomy": {
+    "tiers": {
+      "primary": ["foundations", "layout", "actions", "forms", "navigation", "data_display", "feedback"],
+      "secondary": ["overlays", "media", "patterns", "content"],
+      "others": ["tooling", "miscellaneous"]
+    },
+    "categories": {
+      "foundations": "Foundations and tokens",
+      "layout": "Layout and structure",
+      "actions": "Actions",
+      "forms": "Forms and input",
+      "navigation": "Navigation",
+      "data_display": "Data display",
+      "feedback": "Feedback and status",
+      "overlays": "Overlays",
+      "media": "Media and identity",
+      "patterns": "Patterns and page templates",
+      "content": "Content and voice",
+      "tooling": "Utilities and tooling",
+      "miscellaneous": "Catch-all for anything that fits no category"
+    }
+  },
+  "lookup_rules": {
+    "match_order": ["domain", "library_class_signals", "package_names", "name_in_page_text"],
+    "use_stored_when": "a system matches AND coverage is 'mapped' AND the record is younger than ttl_days",
+    "scan_when": "no match, OR coverage is 'stub', OR the record is older than ttl_days, OR the user asks for a refresh",
+    "on_stub": "use the stored facts, tell the user the record is partial, and offer to research or scan the rest",
+    "on_stale": "use the stored data now, tell the user how old it is, and offer a refresh",
+    "on_no_match": "run the website process: ask the user before extracting a derived design system",
+    "ttl_days": 180
+  },
+  "systems": [
+    {
+      "id": "bootstrap",
+      "name": "Bootstrap",
+      "owner": "Bootstrap core team (open source)",
+      "version_noted": "5.3",
+      "coverage": "mapped",
+      "retrieved_at": "2026-10-12",
+      "match": {
+        "domains": ["getbootstrap.com"],
+        "class_signals": ["container", "row", "col-md-", "btn btn-primary", "navbar", "card-body"],
+        "package_names": ["bootstrap", "react-bootstrap"]
+      },
+      "top_level_sections": ["Getting started", "Customize", "Layout", "Content", "Components", "Forms", "Helpers", "Utilities", "Extend"],
+      "category_map": {
+        "foundations": ["Customize (CSS variables, Sass)", "Reboot"],
+        "layout": ["Layout (grid, containers, breakpoints, columns, gutters)"],
+        "actions": ["Buttons", "Button group", "Close button"],
+        "forms": ["Forms (inputs, select, checks, floating labels, validation)"],
+        "navigation": ["Navbar", "Navs and tabs", "Breadcrumb", "Pagination", "Offcanvas"],
+        "data_display": ["Content (tables, typography)", "List group", "Card"],
+        "feedback": ["Alerts", "Badges", "Toasts", "Progress", "Spinners"],
+        "overlays": ["Modal", "Popovers", "Tooltips", "Dropdowns", "Offcanvas"],
+        "media": ["Images", "Figure", "Carousel"],
+        "patterns": ["Examples and templates"],
+        "content": [],
+        "tooling": ["Helpers", "Utilities", "Extend"],
+        "miscellaneous": ["Accordion", "Collapse", "Scrollspy"]
+      },
+      "gaps_noted": "Mapped from documented sections and the JavaScript component list; not a page-by-page crawl. No content or voice guidance.",
+      "sources": ["https://getbootstrap.com/docs/5.3/getting-started/introduction/"]
+    },
+    {
+      "id": "material3",
+      "name": "Material Design 3",
+      "owner": "Google",
+      "version_noted": "Material 3",
+      "coverage": "mapped",
+      "retrieved_at": "2026-10-12",
+      "match": {
+        "domains": ["m3.material.io", "material.io"],
+        "class_signals": ["mdc-", "mat-", "md-"],
+        "package_names": ["@material/web", "@angular/material", "@mui/material"]
+      },
+      "top_level_sections": ["Foundations", "Styles", "Components", "Develop"],
+      "component_groups_own_naming": ["Action", "Communication", "Containment", "Navigation", "Selection", "Text input"],
+      "category_map": {
+        "foundations": ["Foundations (accessibility, layout, interaction states, design tokens)", "Styles (color, type, icons, motion, shape)"],
+        "layout": ["Layout foundation (window size classes)"],
+        "actions": ["Action components (buttons, FAB, segmented buttons)"],
+        "forms": ["Selection components", "Text input components"],
+        "navigation": ["Navigation bar", "Navigation drawer", "Tabs", "Top app bar", "Bottom app bar"],
+        "data_display": ["Cards", "Lists"],
+        "feedback": ["Communication components (badges, progress, snackbar)"],
+        "overlays": ["Dialogs", "Bottom sheets", "Side sheets", "Tooltips"],
+        "media": ["Icons (Material Symbols)", "Carousel"],
+        "patterns": [],
+        "content": [],
+        "tooling": ["Develop", "Material Theme Builder"],
+        "miscellaneous": ["Dividers"]
+      },
+      "gaps_noted": "Component index page needs JavaScript and could not be read directly; groups come from the Android developer overview. Patterns and content are not primary sections.",
+      "sources": ["https://m3.material.io/get-started", "https://developer.android.com/design/ui/mobile/guides/components/material-overview"]
+    },
+    {
+      "id": "atlassian",
+      "name": "Atlassian Design System",
+      "owner": "Atlassian",
+      "version_noted": "2026 site",
+      "coverage": "mapped",
+      "retrieved_at": "2026-10-12",
+      "match": {
+        "domains": ["atlassian.design", "atlaskit.atlassian.com"],
+        "class_signals": ["atlaskit", "ak-"],
+        "package_names": ["@atlaskit/button", "@atlaskit/tokens"]
+      },
+      "top_level_sections": ["Get started", "Foundations", "Components", "Rovo UI", "Tools", "Release phases"],
+      "component_groups_own_naming": ["Forms and input", "Images and icons", "Labels", "Layout and structure", "Loading", "Messaging", "Navigation", "Overlays and layering", "Primitives", "Status indicators", "Text and data display", "Libraries", "Tooling", "Deprecated"],
+      "category_map": {
+        "foundations": ["Foundations (tokens, color, spacing, typography)"],
+        "layout": ["Layout and structure (Page, Page header, Panel)", "Primitives (Box, Stack, Inline, Flex, Grid, Bleed)"],
+        "actions": ["Button (listed under Forms and input)", "Link (listed under Navigation)"],
+        "forms": ["Forms and input (Checkbox, Radio, Select, Text field, Text area, Toggle, Range, Date time picker, Form)"],
+        "navigation": ["Breadcrumbs", "Menu", "Navigation system", "Pagination", "Tabs", "Link"],
+        "data_display": ["Text and data display (Table, Dynamic table, Table tree, Heading, Code, Inline edit)"],
+        "feedback": ["Messaging (Banner, Flag, Inline message, Section message, Empty state)", "Loading (Progress bar, Skeleton, Spinner)", "Status indicators", "Labels (Badge, Lozenge, Tag)"],
+        "overlays": ["Overlays and layering (Blanket, Drawer, Inline dialog, Popup, Tooltip)", "Modal dialog", "Spotlight"],
+        "media": ["Images and icons (Avatar, Avatar group, Icon, Image, Logo, Object, Tile)"],
+        "patterns": ["Patterns (AMP patterns)"],
+        "content": ["Content (voice and tone, language and grammar, inclusive language, vocabulary, date and time)"],
+        "tooling": ["Tools", "Libraries (CSS, CSS reset, Design tokens, Motion, Popper, Portal, Pragmatic drag and drop)", "Tooling (ESLint plugin, Stylelint plugin, Storybook addon, App provider)"],
+        "miscellaneous": ["Deprecated (Atlassian navigation, Layout grid, Onboarding, Page layout, Side navigation)", "Rovo UI"]
+      },
+      "gaps_noted": "Component list read from the live components page. Foundation sub-items not listed individually.",
+      "sources": ["https://atlassian.design/components", "https://atlassian.design/get-started/about-atlassian-design-system"]
+    },
+    {
+      "id": "sap_fiori",
+      "name": "SAP Fiori",
+      "owner": "SAP",
+      "version_noted": "Guidelines 1.120 to 1.128",
+      "coverage": "mapped",
+      "retrieved_at": "2026-10-12",
+      "match": {
+        "domains": ["experience.sap.com", "ui5.sap.com", "sap.com/design-system"],
+        "class_signals": ["sapUi", "sapM", "sapMBtn", "sapUiBody"],
+        "package_names": ["@ui5/webcomponents", "@sap-ux/fiori-elements"]
+      },
+      "top_level_sections": ["Get Started", "Explore SAP Fiori", "SAP Fiori Design System", "Look, Feel, and Wording", "AI and Joule Design", "General Patterns", "Navigation", "Page Layouts and Floorplans", "UI Elements", "Interaction Design Foundations", "SAP Fiori Elements Framework", "Analytical Frameworks", "UI Kit"],
+      "category_map": {
+        "foundations": ["SAP Fiori Design System (principles, accessibility, multi-device, responsive spacing)", "Look, Feel, and Wording (design tokens, theming, colors, motion)"],
+        "layout": ["Page Layouts and Floorplans", "Flexible Column Layout"],
+        "actions": ["UI Elements (Action / Navigation type)"],
+        "forms": ["UI Elements (input and selection types)"],
+        "navigation": ["Navigation (general patterns)", "UI Elements (Action / Navigation type, breadcrumb)"],
+        "data_display": ["UI Elements (tables, charts)"],
+        "feedback": ["UI Elements (message and busy indicators)"],
+        "overlays": ["UI Elements (dialogs, popovers)"],
+        "media": ["UI Elements"],
+        "patterns": ["General Patterns", "Floorplans", "SAP Fiori Elements framework"],
+        "content": ["UI Texts and In-App Help"],
+        "tooling": ["UI Kit", "SAP S/4HANA Web UI Kit", "Design stencils"],
+        "miscellaneous": ["Analytical Frameworks", "SAP Fiori Launchpad", "AI and Joule Design", "UI Elements for SAP Web Components"]
+      },
+      "gaps_noted": "Individual UI element names were not retrieved; only the categories they sit under. Navigation structure changed at guideline version 1.88.",
+      "sources": ["https://experience.sap.com/fiori-design-web/v1-120/explore", "https://experience.sap.com/fiori-design-web/v1-122/updated-navigation-structure-for-guideline-version-1-88"]
+    },
+    {
+      "id": "carbon",
+      "name": "Carbon Design System",
+      "owner": "IBM",
+      "version_noted": "v11",
+      "coverage": "partial",
+      "retrieved_at": "2026-10-12",
+      "match": {
+        "domains": ["carbondesignsystem.com"],
+        "class_signals": ["cds--", "bx--"],
+        "package_names": ["@carbon/react", "@carbon/web-components", "carbon-components"]
+      },
+      "top_level_sections": ["Getting started", "Foundations", "Components", "Patterns", "IBM Design Language"],
+      "category_map": {
+        "foundations": ["2x grid", "Accessibility", "Color", "Icons", "Motion", "Theming", "Typography"],
+        "layout": ["2x grid (in foundations)"],
+        "actions": [],
+        "forms": [],
+        "navigation": [],
+        "data_display": [],
+        "feedback": [],
+        "overlays": [],
+        "media": ["Icons (in foundations)"],
+        "patterns": ["Patterns (create flows, edit, export, import, chatbots, in-app learning)"],
+        "content": ["IBM Design Language"],
+        "tooling": ["Design kits", "Carbon MCP"],
+        "miscellaneous": ["Carbon for IBM Products", "Carbon for Salesforce"]
+      },
+      "gaps_noted": "Component-level grouping was not retrievable. Empty lists mean not researched, not absent.",
+      "sources": ["https://preview.carbondesignsystem.com/getting-started/designing/overview", "https://carbondesignsystem.com/community/patterns/"]
+    },
+    {
+      "id": "polaris",
+      "name": "Shopify Polaris",
+      "owner": "Shopify",
+      "version_noted": "React in maintenance mode; web components current",
+      "coverage": "mapped",
+      "retrieved_at": "2026-10-12",
+      "match": {
+        "domains": ["polaris.shopify.com", "shopify.github.io/polaris-react-archive"],
+        "class_signals": ["Polaris-"],
+        "package_names": ["@shopify/polaris"]
+      },
+      "top_level_sections": ["Getting started", "Foundations", "Design", "Content", "Patterns", "Components", "Tokens"],
+      "component_groups_own_naming": ["Actions", "Layout and structure", "Selection and input", "Images and icons", "Feedback indicators"],
+      "category_map": {
+        "foundations": ["Foundations", "Tokens"],
+        "layout": ["Layout and structure (Bleed, Block stack, Box, Card, Divider, Form layout, Grid, Inline grid, Inline stack, Layout, Page)"],
+        "actions": ["Actions (Account connection, Button, Button group)"],
+        "forms": ["Selection and input (Autocomplete, Checkbox, Choice list, Color picker, Combobox, Date picker, Drop zone, Filters, Form, Radio button, Range slider, Select, Tag, Text field)"],
+        "navigation": ["Patterns (navigation)"],
+        "data_display": ["Titles and text", "Card"],
+        "feedback": ["Feedback indicators (Badge, Banner, Exception list, Progress bar, Skeleton)"],
+        "overlays": ["Overlays (popover, tooltip)"],
+        "media": ["Images and icons (Avatar, Icon, Keyboard key, Thumbnail, Video thumbnail)"],
+        "patterns": ["Patterns (page layouts, home cards, error messages, mobile patterns)"],
+        "content": ["Content"],
+        "tooling": ["Design resources (Figma)", "Development resources (VS Code extension)"],
+        "miscellaneous": ["Empty state", "Callout card"]
+      },
+      "gaps_noted": "Mapped from the archived Polaris React docs and secondary summaries; the current web components docs may differ.",
+      "sources": ["https://shopify.github.io/polaris-react-archive/components/typography", "https://ecomm.design/shopify-polaris/"]
+    },
+    {
+      "id": "fluent2",
+      "name": "Fluent 2",
+      "owner": "Microsoft",
+      "coverage": "stub",
+      "retrieved_at": "2026-10-12",
+      "match": {
+        "domains": ["fluent2.microsoft.design"],
+        "class_signals": ["fui-"],
+        "package_names": ["@fluentui/react-components"]
+      },
+      "known_facts": ["A directory lists 18 foundations and 26 components", "Targets Web React, iOS, Windows and Android"],
+      "category_map": null,
+      "next_step": "Research top-level sections and component groups, then upgrade to mapped.",
+      "sources": ["https://designsystems.surf/design-systems/microsoft"]
+    },
+    {
+      "id": "ant_design",
+      "name": "Ant Design",
+      "owner": "Ant Group (Alibaba)",
+      "coverage": "stub",
+      "retrieved_at": "2026-10-12",
+      "match": {
+        "domains": ["ant.design"],
+        "class_signals": ["ant-btn", "ant-"],
+        "package_names": ["antd"]
+      },
+      "known_facts": ["Aimed at enterprise and data-heavy products", "Large React component set"],
+      "category_map": null,
+      "next_step": "Research component groups, then upgrade to mapped.",
+      "sources": ["https://designsystems.surf/design-systems/alibaba"]
+    },
+    {
+      "id": "spectrum",
+      "name": "Adobe Spectrum",
+      "owner": "Adobe",
+      "coverage": "stub",
+      "retrieved_at": "2026-10-12",
+      "match": {
+        "domains": ["spectrum.adobe.com"],
+        "class_signals": ["spectrum-"],
+        "package_names": ["@adobe/react-spectrum", "@spectrum-web-components"]
+      },
+      "known_facts": ["Design backbone for Adobe products", "Provides a unified design language and component library"],
+      "category_map": null,
+      "next_step": "Research top-level sections and component groups, then upgrade to mapped.",
+      "sources": ["https://damilareoo.substack.com/p/exploring-public-design-systems-shaping"]
+    },
+    {
+      "id": "lightning",
+      "name": "Salesforce Lightning Design System",
+      "owner": "Salesforce",
+      "coverage": "stub",
+      "retrieved_at": "2026-10-12",
+      "match": {
+        "domains": ["lightningdesignsystem.com"],
+        "class_signals": ["slds-"],
+        "package_names": ["@salesforce-ux/design-system"]
+      },
+      "known_facts": ["Covers design, layout, components and tokens", "Early adopter of design tokens", "Has accessibility patterns"],
+      "category_map": null,
+      "next_step": "Research top-level sections and component groups, then upgrade to mapped.",
+      "sources": ["https://designsystems.surf/design-systems/salesforce", "https://www.aufaitux.com/?p=1570"]
+    },
+    {
+      "id": "apple_hig",
+      "name": "Apple Human Interface Guidelines",
+      "owner": "Apple",
+      "coverage": "stub",
+      "retrieved_at": "2026-10-12",
+      "match": {
+        "domains": ["developer.apple.com/design"],
+        "class_signals": [],
+        "package_names": []
+      },
+      "top_level_sections": ["Foundations", "Patterns", "Components", "Inputs", "Technologies"],
+      "known_facts": ["Five core categories per a design systems survey"],
+      "category_map": null,
+      "next_step": "Research component groups, then upgrade to mapped.",
+      "sources": ["https://www.designsystemscollective.com/why-every-company-has-a-different-design-system-f992ad7606ea"]
+    }
+  ],
+  "refresh_policy": {
+    "ttl_days": 180,
+    "triggers": ["record older than ttl_days", "user asks for a refresh", "scan finds sections that contradict the stored map", "a stub is requested for comparison"],
+    "on_refresh": "re-research the system, update category_map and retrieved_at, keep the old record in history"
+  }
+}

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin · GapScan</title>
+  <link rel="stylesheet" href="/app/styles.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1>Admin</h1>
+      <p class="lead">Every design system extracted on this GapScan, with the full detail behind each one. People using GapScan don't see this area.</p>
+    </div>
+  </header>
+  <div class="page-tabs" role="tablist" aria-label="Admin">
+    <button role="tab" data-view="systems" aria-controls="view-systems">Design systems <span class="tab-count" id="count-systems"></span></button>
+    <button role="tab" data-view="activity" aria-controls="view-activity">Activity <span class="tab-count" id="count-failed"></span></button>
+    <button role="tab" data-view="library" aria-controls="view-library">Reference library <span class="tab-count" id="count-library"></span></button>
+    <button role="tab" data-view="settings" aria-controls="view-settings">Settings</button>
+  </div>
+
+  <section class="card view" id="view-systems" role="tabpanel" aria-labelledby="systems-title">
+    <div class="card-head">
+      <h2 id="systems-title">All design systems</h2>
+      <label class="inline filter-label"><span class="visually-hidden">Search</span><input id="search" type="search" placeholder="Search by name or owner"></label>
+    </div>
+    <div class="table-wrap"><table id="systems" class="admin-table"></table></div>
+    <p class="muted" id="systems-status" role="status">Loading…</p>
+  </section>
+
+  <section class="card view" id="view-activity" role="tabpanel" aria-labelledby="activity-title" hidden>
+    <div class="card-head">
+      <h2 id="activity-title">Recent activity</h2>
+      <label class="inline muted"><input type="checkbox" id="failed-only"> Failures only</label>
+    </div>
+    <div class="table-wrap"><table id="activity" class="admin-table"></table></div>
+  </section>
+
+  <section class="card view" id="view-library" role="tabpanel" aria-labelledby="library-title" hidden>
+    <div class="card-head"><h2 id="library-title">Reference library</h2><span class="muted" id="library-summary"></span></div>
+    <p class="muted library-intro">The design systems GapScan knows. Every recommendation and migration report compares against these. Each is a snapshot of one version, read by the same pipeline as user sources and checksummed, so results don’t drift when a library ships a new release; no AI model is trained. Rebuild them with <code>node packages/library/scripts/build.ts</code>.</p>
+    <div class="library-grid" id="library"><p class="muted">Loading…</p></div>
+  </section>
+
+  <section class="card view" id="view-settings" role="tabpanel" aria-labelledby="settings-title" hidden>
+    <h2 id="settings-title">Settings</h2>
+    <p class="muted">How this GapScan is set up. These come from the server's environment; secrets are never shown.</p>
+    <dl class="settings" id="settings"></dl>
+  </section>
+</main>
+<script src="/app/common.js"></script>
+<script src="/app/admin.js"></script>
+</body>
+</html>

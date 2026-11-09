@@ -1,0 +1,5 @@
+:root { --brand: #2563eb; --font-size: 14px; }
+.btn {background:var(--brand);color:white;border:0;border-radius:4px;padding:10px 18px;font-size:var(--font-size)}
+.btn:hover {background:#1d4ed8}
+.btn:focus {outline:2px solid #93c5fd}
+.btn:disabled {opacity:.5}

@@ -1,0 +1,16 @@
+{
+  "name": "gapscan-editable-project",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.9.0" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "prestart": "npm run build",
+    "start": "node --env-file-if-exists=.env scripts/dev.mjs",
+    "predev": "npm run build",
+    "dev": "node --env-file-if-exists=.env scripts/dev.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check web/app.js && node --check web/local-library.js && node --check web/comparison-transport.js && node --check web/stepper.js && node --check web/report-experience.js && node --check web/decision-brief.js && node --check web/upgrade-guides.js && node --check scripts/dev.mjs && node scripts/validate-artifact.mjs"
+  }
+}

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in to GapScan</title>
+  <link rel="stylesheet" href="/app/styles.css">
+</head>
+<body>
+<main class="narrow">
+  <header class="top">
+    <div><h1>Sign in to GapScan</h1><p class="lead" id="lead">No password: we email you a link that signs you in.</p></div>
+  </header>
+  <section class="card" id="request">
+    <p class="error" id="sso-error" role="alert" hidden></p>
+    <div id="sso" class="sso" hidden></div>
+    <form id="email-form">
+      <label for="email">Work email</label>
+      <div class="row"><input id="email" type="email" autocomplete="email" required placeholder="you@company.com"><button class="primary" type="submit">Email me a link</button></div>
+    </form>
+    <p class="muted" id="request-status" role="status"></p>
+  </section>
+  <section class="card test-users" id="test-users" hidden>
+    <h2>Testing</h2>
+    <p class="muted">Test accounts for this local server. No email needed; the last one you use signs you in automatically next time.</p>
+    <div class="row" id="test-buttons"></div>
+    <p class="muted" id="test-status" role="status"></p>
+  </section>
+  <section class="card" id="finish" hidden>
+    <p>You opened a sign-in link. Continue to sign in on this browser.</p>
+    <div class="row"><button class="primary" id="finish-button" type="button">Sign in</button></div>
+    <p class="error" id="finish-error" role="alert"></p>
+  </section>
+</main>
+<script src="/app/common.js"></script>
+<script src="/app/signin.js"></script>
+</body>
+</html>

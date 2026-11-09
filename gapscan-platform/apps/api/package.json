@@ -1,0 +1,25 @@
+{
+  "name": "@gapscan/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@gapscan/adapters": "0.1.0",
+    "@gapscan/assets": "0.1.0",
+    "@gapscan/codemod": "0.1.0",
+    "@gapscan/drafting": "0.1.0",
+    "@gapscan/estimate": "0.1.0",
+    "@gapscan/exports": "0.1.0",
+    "@gapscan/extraction": "0.1.0",
+    "@gapscan/gapscan": "0.1.0",
+    "@gapscan/infra": "0.1.0",
+    "@gapscan/library": "0.1.0",
+    "@gapscan/objects": "0.1.0",
+    "@gapscan/schema": "0.1.0",
+    "@gapscan/taxonomy": "0.1.0",
+    "@gapscan/usage": "0.1.0",
+    "fastify": "^5.0.0",
+    "nodemailer": "10.1.7",
+    "zod": "^4.0.0"
+  }
+}

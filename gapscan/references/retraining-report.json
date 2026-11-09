@@ -1,0 +1,325 @@
+{
+  "generatedAt": "2026-10-13T12:09:12.326Z",
+  "method": "Deterministic re-indexing of pinned ZIP source; no AI weight training or downloaded script execution.",
+  "systems": [
+    {
+      "id": "reference-bootstrap-6-alpha-1",
+      "name": "Bootstrap",
+      "version": "6.0.0-alpha.1",
+      "before": {
+        "items": 2940,
+        "components": 1481,
+        "colors": 466,
+        "typography": 235,
+        "tokens": 1210,
+        "icons": 72,
+        "apis": 4,
+        "variants": 10453
+      },
+      "after": {
+        "items": 4323,
+        "components": 1527,
+        "colors": 669,
+        "typography": 329,
+        "tokens": 2431,
+        "icons": 81,
+        "apis": 93,
+        "variants": 10489
+      },
+      "sourceFilesBefore": 166,
+      "sourceFilesAfter": 362,
+      "archiveSha256": "fee3bc31e16ba108ed8ee4971409ec27e19de96cb537b11afabd46fe363aad5c",
+      "pinnedCommit": null
+    },
+    {
+      "id": "reference-material-web",
+      "name": "Material Web",
+      "version": "2.5.0",
+      "before": {
+        "items": 412,
+        "components": 115,
+        "colors": 54,
+        "typography": 50,
+        "tokens": 214,
+        "icons": 61,
+        "apis": 1,
+        "variants": 666
+      },
+      "after": {
+        "items": 3403,
+        "components": 405,
+        "colors": 1177,
+        "typography": 199,
+        "tokens": 2699,
+        "icons": 121,
+        "apis": 137,
+        "variants": 1489
+      },
+      "sourceFilesBefore": 153,
+      "sourceFilesAfter": 989,
+      "archiveSha256": "338b698e8d24bab3a71f5e5ef0615e7d3d25f46418337a15e021cc7090dd849c",
+      "pinnedCommit": "e3471c042a8decb822aba2e1af6134adb86e05dc"
+    },
+    {
+      "id": "reference-carbon-web-components",
+      "name": "Carbon Web Components",
+      "version": "2.65.0",
+      "before": {
+        "items": 418,
+        "components": 114,
+        "colors": 245,
+        "typography": 4,
+        "tokens": 299,
+        "icons": 3,
+        "apis": 0,
+        "variants": 449
+      },
+      "after": {
+        "items": 5744,
+        "components": 1575,
+        "colors": 366,
+        "typography": 179,
+        "tokens": 936,
+        "icons": 2839,
+        "apis": 209,
+        "variants": 6102
+      },
+      "sourceFilesBefore": 158,
+      "sourceFilesAfter": 4394,
+      "archiveSha256": "ee35ab54830ba0c731f61345b32e607bee2cc8d7437a97f6fc3e8e0032bbccb7",
+      "pinnedCommit": "cc24a2bf79eefe97795eee920d6e91db2ffcd1bf"
+    },
+    {
+      "id": "reference-web-awesome",
+      "name": "Web Awesome",
+      "version": "3.14.0",
+      "before": {
+        "items": 1011,
+        "components": 379,
+        "colors": 315,
+        "typography": 161,
+        "tokens": 476,
+        "icons": 22,
+        "apis": 5,
+        "variants": 3354
+      },
+      "after": {
+        "items": 2682,
+        "components": 920,
+        "colors": 342,
+        "typography": 337,
+        "tokens": 585,
+        "icons": 732,
+        "apis": 161,
+        "variants": 5659
+      },
+      "sourceFilesBefore": 104,
+      "sourceFilesAfter": 1229,
+      "archiveSha256": "89b288419684905b2cd8e9485f3f26fc9570aaf0b8bbe8da17fca3a5530bfaec",
+      "pinnedCommit": "e99dc5e26ae63410bd481aa8a686a61ff7158ccd"
+    },
+    {
+      "id": "reference-bootstrap-3-4-1",
+      "name": "Bootstrap",
+      "version": "3.4.1",
+      "before": {
+        "items": 992,
+        "components": 491,
+        "colors": 98,
+        "typography": 116,
+        "tokens": 4,
+        "icons": 290,
+        "apis": 0,
+        "variants": 1618
+      },
+      "after": {
+        "items": 1220,
+        "components": 635,
+        "colors": 124,
+        "typography": 158,
+        "tokens": 6,
+        "icons": 298,
+        "apis": 9,
+        "variants": 4278
+      },
+      "sourceFilesBefore": 22,
+      "sourceFilesAfter": 189,
+      "archiveSha256": "d3d4d2445c668df49d126f8ae6b2344e08509d3ea18cd7a14d55e30d8961c2b4",
+      "pinnedCommit": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
+    },
+    {
+      "id": "reference-bootstrap-4-6-2",
+      "name": "Bootstrap",
+      "version": "4.6.2",
+      "before": {
+        "items": 1832,
+        "components": 1577,
+        "colors": 149,
+        "typography": 98,
+        "tokens": 41,
+        "icons": 2,
+        "apis": 0,
+        "variants": 1988
+      },
+      "after": {
+        "items": 2829,
+        "components": 1666,
+        "colors": 362,
+        "typography": 217,
+        "tokens": 762,
+        "icons": 19,
+        "apis": 119,
+        "variants": 4592
+      },
+      "sourceFilesBefore": 19,
+      "sourceFilesAfter": 239,
+      "archiveSha256": "e5edd86af712f1ddef732da70bc7f6059c37ac616688a86152f9f2047e6b04c4",
+      "pinnedCommit": "e5643aaa89eb67327a5b4abe7db976f0ea276b70"
+    },
+    {
+      "id": "reference-bootstrap-5-3-8",
+      "name": "Bootstrap",
+      "version": "5.3.8",
+      "before": {
+        "items": 2648,
+        "components": 2040,
+        "colors": 268,
+        "typography": 126,
+        "tokens": 466,
+        "icons": 9,
+        "apis": 0,
+        "variants": 4417
+      },
+      "after": {
+        "items": 3862,
+        "components": 2130,
+        "colors": 611,
+        "typography": 242,
+        "tokens": 1429,
+        "icons": 48,
+        "apis": 98,
+        "variants": 7335
+      },
+      "sourceFilesBefore": 28,
+      "sourceFilesAfter": 272,
+      "archiveSha256": "1be5ec1d456ac25b88915f827e6d9185e0470883f939f1bf90d71e17c88b6c35",
+      "pinnedCommit": "25aa8cc0b32f0d1a54be575347e6d84b70b1acd7"
+    },
+    {
+      "id": "reference-bootstrap-icons-1-13-2",
+      "name": "Bootstrap Icons",
+      "version": "1.13.2",
+      "before": {
+        "items": 2078,
+        "components": 0,
+        "colors": 0,
+        "typography": 0,
+        "tokens": 0,
+        "icons": 2078,
+        "apis": 0,
+        "variants": 2078
+      },
+      "after": {
+        "items": 2088,
+        "components": 1,
+        "colors": 0,
+        "typography": 7,
+        "tokens": 4,
+        "icons": 2078,
+        "apis": 2,
+        "variants": 6234
+      },
+      "sourceFilesBefore": 1,
+      "sourceFilesAfter": 4162,
+      "archiveSha256": "df67b53be47bd1c0ca2c22bcb5200226768d1b9de2eae50241c9755cbe3b0ab2",
+      "pinnedCommit": "afbfcbcb9bea79ea9923fa9ef82ea03d7ee6c01f"
+    },
+    {
+      "id": "reference-blueprint",
+      "name": "Blueprint",
+      "version": "6.21.0",
+      "before": {
+        "items": 1923,
+        "components": 475,
+        "colors": 504,
+        "typography": 126,
+        "tokens": 461,
+        "icons": 726,
+        "apis": 34,
+        "variants": 756
+      },
+      "after": {
+        "items": 5603,
+        "components": 1472,
+        "colors": 991,
+        "typography": 204,
+        "tokens": 1199,
+        "icons": 1925,
+        "apis": 718,
+        "variants": 3345
+      },
+      "sourceFilesBefore": 104,
+      "sourceFilesAfter": 3172,
+      "archiveSha256": "b1fcec69718610592925cddf10b8461b1ea37e6467914c0826988c45828e54bb",
+      "pinnedCommit": "51cd1ff7545954d6a1e27320449754d58bf37216"
+    },
+    {
+      "id": "reference-fluent-ui",
+      "name": "Fluent UI React",
+      "version": "9.74.9",
+      "before": {
+        "items": 1136,
+        "components": 205,
+        "colors": 788,
+        "typography": 34,
+        "tokens": 913,
+        "icons": 0,
+        "apis": 18,
+        "variants": 11
+      },
+      "after": {
+        "items": 7965,
+        "components": 3241,
+        "colors": 1665,
+        "typography": 120,
+        "tokens": 2013,
+        "icons": 27,
+        "apis": 2651,
+        "variants": 429
+      },
+      "sourceFilesBefore": 100,
+      "sourceFilesAfter": 4440,
+      "archiveSha256": "8431b14d60834f2013e0abeb137dfe23eabb5e6fac1e959f6c51434a505b9bfd",
+      "pinnedCommit": "16fcf57fe487780e42c6326bf56b30061e2caa11"
+    },
+    {
+      "id": "reference-spectrum-web-components",
+      "name": "Spectrum Web Components",
+      "version": "1.12.4",
+      "before": {
+        "items": 201,
+        "components": 169,
+        "colors": 13,
+        "typography": 7,
+        "tokens": 7,
+        "icons": 13,
+        "apis": 0,
+        "variants": 2726
+      },
+      "after": {
+        "items": 7982,
+        "components": 791,
+        "colors": 3198,
+        "typography": 791,
+        "tokens": 6776,
+        "icons": 131,
+        "apis": 104,
+        "variants": 4015
+      },
+      "sourceFilesBefore": 65,
+      "sourceFilesAfter": 1064,
+      "archiveSha256": "9c212826d4ca96559a6a65fddbc25e8e34951f72aa4a25c3f1418b55977dfdfb",
+      "pinnedCommit": "be922808ae0dc5eb4cded7541c12265254a31b2d"
+    }
+  ]
+}

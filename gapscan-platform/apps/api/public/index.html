@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GapScan</title>
+  <link rel="stylesheet" href="/app/styles.css">
+</head>
+<body>
+<main>
+  <!-- Home: one way in, then your design systems. -->
+  <div id="home" hidden>
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 id="hero-title">See your design system clearly</h1>
+      <p class="lead hero-lead">Add your website, Figma file or brand files. GapScan organises what it finds, then helps you export it, document it, or move to another design system.</p>
+      <form class="start" id="start-form" novalidate>
+        <div class="start-box" id="start-box">
+          <label class="visually-hidden" for="start-url">Website or Figma link</label>
+          <input id="start-url" type="url" inputmode="url" autocomplete="off" placeholder="Paste your website or Figma link">
+          <span class="start-or muted">or</span>
+          <label class="button start-files" for="start-files">Choose files</label>
+          <input id="start-files" class="visually-hidden" type="file" multiple accept=".pptx,.docx,.pdf,.zip,.css,.scss,.sass,.less,.json,.html,.htm,.md,.mdx,.txt,.js,.jsx,.ts,.tsx,.mjs,.vue,.svelte,.png,.jpg,.jpeg,.webp,.gif">
+          <button class="primary" type="submit" id="start-go">Get started</button>
+        </div>
+        <p class="muted start-hint" id="start-hint">You can also drop files anywhere on this box: brand guides, PDFs, token files or screenshots.</p>
+        <p class="reader-choice muted"><label for="start-reader">Read websites with</label> <select id="start-reader" class="reader-select"></select> <span class="reader-note" id="start-reader-note"></span></p>
+        <ul class="plain start-files-list" id="start-files-list"></ul>
+        <p class="error" id="start-error" role="alert"></p>
+      </form>
+      <ol class="how" aria-label="How it works">
+        <li><b>1</b><span><strong>Add your system</strong><span class="muted">A link or a few files is enough.</span></span></li>
+        <li><b>2</b><span><strong>See it organised</strong><span class="muted">Colours, type, spacing and components in one place.</span></span></li>
+        <li><b>3</b><span><strong>Use it</strong><span class="muted">Export to Figma or PDF, write the documents, or plan a migration.</span></span></li>
+      </ol>
+    </section>
+
+    <section class="card reading" id="reading" aria-labelledby="reading-title" hidden>
+      <h2 id="reading-title">Reading your design system</h2>
+      <p class="muted" id="reading-note">This usually takes under a minute; websites take longer. You can leave this page; it keeps going.</p>
+      <ol class="progress-steps" id="home-steps"></ol>
+      <div class="notice error-notice" id="reading-failed" role="alert" hidden>
+        <strong>We couldn’t finish reading it</strong>
+        <p id="reading-message"></p>
+        <a class="button" id="reading-open" href="#">Check the sources</a>
+      </div>
+    </section>
+
+    <section aria-labelledby="mine-title" id="mine" hidden>
+      <h2 id="mine-title" class="section-title">Your design systems</h2>
+      <div class="project-grid" id="projects" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <!-- One project: its name, extractions, people, sources and the extract action. -->
+  <div id="project-view" hidden>
+    <header class="top">
+      <div class="title-block">
+        <div class="title-edit" id="title-show">
+          <h1 id="project-title">Project</h1>
+          <button type="button" class="quiet" id="rename">Rename</button>
+        </div>
+        <form class="title-edit" id="rename-form" hidden>
+          <label class="visually-hidden" for="rename-input">Project name</label>
+          <input id="rename-input" type="text" maxlength="200" required>
+          <button class="primary" type="submit">Save</button>
+          <button type="button" id="rename-cancel">Cancel</button>
+        </form>
+        <p class="lead" id="project-summary"></p>
+        <p class="error" id="rename-error" role="alert"></p>
+      </div>
+    </header>
+
+    <section class="card" aria-labelledby="versions-title">
+      <h2 id="versions-title">Versions</h2>
+      <ul class="plain" id="versions"></ul>
+    </section>
+
+    <section class="card" aria-labelledby="sources-title">
+      <div class="card-head">
+        <h2 id="sources-title">Sources</h2>
+        <span class="muted" id="source-count"></span>
+      </div>
+      <p class="muted card-intro">What GapScan reads to find your design system. Add as many as you have: a live site, a Figma file, brand guides, token files or code.</p>
+
+      <label class="dropzone" id="dropzone" for="files">
+        <input id="files" class="visually-hidden" type="file" multiple accept=".pptx,.docx,.pdf,.zip,.css,.scss,.sass,.less,.json,.html,.htm,.md,.mdx,.txt,.js,.jsx,.ts,.tsx,.mjs,.vue,.svelte,.png,.jpg,.jpeg,.webp,.gif">
+        <span class="dropzone-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V5"/><path d="m7.5 9.5 4.5-4.5 4.5 4.5"/><path d="M4.5 15.5v3A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5v-3"/></svg></span>
+        <span class="dropzone-title">Drop files here, or <u>choose files</u></span>
+        <span class="muted dropzone-hint">PDF, PowerPoint, Word, ZIP, CSS / SCSS / token JSON, component code, HTML, Markdown, or screenshots (PNG, JPEG, WebP). Up to 40 MB each.</span>
+      </label>
+
+      <form class="link-row" id="link-form" novalidate>
+        <label for="url">Or add a link</label>
+        <div class="row">
+          <input id="url" type="url" inputmode="url" autocomplete="off" placeholder="https://www.example.com or https://www.figma.com/design/…">
+          <button id="add-url" type="submit">Add link</button>
+        </div>
+        <p class="muted field-hint" id="url-hint">Websites are rendered in a sandboxed browser at desktop, tablet and phone widths, plus dark mode.</p>
+        <p class="reader-choice muted"><label for="url-reader">Read websites with</label> <select id="url-reader" class="reader-select"></select> <span class="reader-note" id="url-reader-note"></span></p>
+      </form>
+
+      <details class="paste" id="paste">
+        <summary>Paste code instead</summary>
+        <label for="code-name">File name</label>
+        <input id="code-name" type="text" value="styles.css">
+        <label for="code">Code</label>
+        <textarea id="code" placeholder=":root { --brand: #0B5FD6; } .btn { … }"></textarea>
+        <div class="row" style="margin-top:8px"><button id="add-code" type="button">Add code</button></div>
+      </details>
+
+      <ul class="plain source-cards" id="source-list" aria-live="polite"></ul>
+      <p class="error" id="source-error" role="alert"></p>
+      <details class="muted fine-print"><summary>How sources are handled</summary>
+        <p>Files are read, never run. Links must be public https addresses. From images GapScan estimates colours, corner radii, borders and spacing; text isn't read from images. Name retina screenshots <code>…@2x.png</code> so sizes come out in CSS pixels.</p>
+      </details>
+    </section>
+
+    <section class="card extract-panel" id="extract-panel" aria-labelledby="run-title">
+      <div class="card-head">
+        <h2 id="run-title">Read your sources</h2>
+      </div>
+      <div id="extract-idle">
+        <p class="muted" id="extract-ready">Add at least one source to extract.</p>
+        <div class="row">
+          <button class="primary" id="run" type="button" disabled>Update my design system</button>
+          <label class="inline muted" id="refresh-row" hidden><input type="checkbox" id="refresh"> Read saved websites again instead of reusing them</label>
+        </div>
+      </div>
+      <div id="extract-running" hidden>
+        <ol class="progress-steps" id="steps"></ol>
+        <div class="row">
+          <button id="cancel" type="button">Cancel</button>
+          <span id="status" class="muted" aria-live="polite"></span>
+        </div>
+      </div>
+      <div class="notice error-notice" id="extract-failed" role="alert" hidden>
+        <strong id="failed-title">The extraction stopped</strong>
+        <p id="failed-message"></p>
+        <button type="button" id="retry">Try again</button>
+      </div>
+      <details class="log-details" id="log-details" hidden>
+        <summary>Details</summary>
+        <div class="log" id="log" aria-live="off"></div>
+      </details>
+    </section>
+
+    <section class="card" id="project-card" aria-labelledby="people-title" hidden>
+      <h2 id="people-title">People</h2>
+      <ul class="plain" id="members"></ul>
+      <form id="invite" class="row" hidden>
+        <label class="visually-hidden" for="invite-email">Email address to invite</label>
+        <input id="invite-email" type="email" placeholder="colleague@company.com" required>
+        <select id="invite-role" aria-label="Role"><option value="editor">Editor</option><option value="owner">Owner</option></select>
+        <button type="submit">Invite</button>
+      </form>
+      <p class="muted" id="invite-status" role="status"></p>
+    </section>
+  </div>
+</main>
+<script src="/app/common.js"></script>
+<script src="/app/index.js"></script>
+</body>
+</html>

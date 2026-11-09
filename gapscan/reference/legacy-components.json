@@ -1,0 +1,474 @@
+[
+  {
+    "name": "Container & Breakpoints",
+    "category": "Layout",
+    "tier": "Simple",
+    "hours": 3,
+    "risk": "Low",
+    "desc": "Addition of xxl (1400px) breakpoint; fluid container width updates."
+  },
+  {
+    "name": "Grid System & Columns",
+    "category": "Layout",
+    "tier": "Moderate",
+    "hours": 10,
+    "risk": "Medium",
+    "desc": "Row & column alignment, auto-margins, auto-layout columns, order utilities."
+  },
+  {
+    "name": "Gutters",
+    "category": "Layout",
+    "tier": "Moderate",
+    "hours": 8,
+    "risk": "Medium",
+    "desc": "Complete removal of .no-gutters; introduction of .g-*, .gx-*, .gy-* gutter classes."
+  },
+  {
+    "name": "CSS Grid System",
+    "category": "Layout",
+    "tier": "Moderate",
+    "hours": 6,
+    "risk": "Medium",
+    "desc": "Adoption of opt-in display: grid system (.grid, .g-col-*) alongside flexbox grid."
+  },
+  {
+    "name": "Reboot & Base HTML Reset",
+    "category": "Content",
+    "tier": "Simple",
+    "hours": 3,
+    "risk": "Low",
+    "desc": "CSS box-sizing reset, default body styling, native form element resets."
+  },
+  {
+    "name": "Typography & Headings",
+    "category": "Content",
+    "tier": "Moderate",
+    "hours": 6,
+    "risk": "Low",
+    "desc": "Display headings (display-1..6), font-weight class updates, rem line-heights."
+  },
+  {
+    "name": "Code & Preformatted Text",
+    "category": "Content",
+    "tier": "Simple",
+    "hours": 2,
+    "risk": "Low",
+    "desc": "Code, kbd, pre, samp syntax styling adjustments and CSS variables."
+  },
+  {
+    "name": "Images",
+    "category": "Content",
+    "tier": "Simple",
+    "hours": 2,
+    "risk": "Low",
+    "desc": "Image responsive classes (.img-fluid, .img-thumbnail) and alignment utilities."
+  },
+  {
+    "name": "Tables",
+    "category": "Content",
+    "tier": "Moderate",
+    "hours": 6,
+    "risk": "Low",
+    "desc": "Drop .thead-dark/light; update table variants (.table-*), borders with CSS vars."
+  },
+  {
+    "name": "Figures",
+    "category": "Content",
+    "tier": "Simple",
+    "hours": 2,
+    "risk": "Low",
+    "desc": "Figure and figure caption element alignment and spacing adjustments."
+  },
+  {
+    "name": "Alerts",
+    "category": "Components",
+    "tier": "Moderate",
+    "hours": 4,
+    "risk": "Low",
+    "desc": "Replace legacy close button with .btn-close; update alert-heading and links."
+  },
+  {
+    "name": "Badges",
+    "category": "Components",
+    "tier": "Simple",
+    "hours": 3,
+    "risk": "Low",
+    "desc": "Replace .badge-pill with .rounded-pill; migrate contextual badges to .bg-* utilities."
+  },
+  {
+    "name": "Breadcrumb",
+    "category": "Components",
+    "tier": "Simple",
+    "hours": 2,
+    "risk": "Low",
+    "desc": "Divider customization moved to CSS custom property --bs-breadcrumb-divider."
+  },
+  {
+    "name": "Buttons & Button Groups",
+    "category": "Components",
+    "tier": "Simple",
+    "hours": 4,
+    "risk": "Low",
+    "desc": "Drop .btn-block (use .d-grid); update toggle button markup and active states."
+  },
+  {
+    "name": "Cards",
+    "category": "Components",
+    "tier": "Moderate",
+    "hours": 6,
+    "risk": "Medium",
+    "desc": "Remove card-deck and card-columns; convert multi-card views to grid .row-cols-*."
+  },
+  {
+    "name": "Carousel",
+    "category": "Components",
+    "tier": "Moderate",
+    "hours": 6,
+    "risk": "Medium",
+    "desc": "Update data attributes to data-bs-slide and data-bs-slide-to; dark variant, touch swipe."
+  },
+  {
+    "name": "Collapse",
+    "category": "Components",
+    "tier": "Moderate",
+    "hours": 5,
+    "risk": "Medium",
+    "desc": "Update data-bs-toggle=\"collapse\"; migrate programmatic show/hide to native ES6 API."
+  },
+  {
+    "name": "Accordion",
+    "category": "Components",
+    "tier": "Moderate",
+    "hours": 7,
+    "risk": "Medium",
+    "desc": "Formal component rewrite from legacy card-collapse into dedicated .accordion-item markup."
+  },
+  {
+    "name": "Dropdowns",
+    "category": "Components",
+    "tier": "Moderate",
+    "hours": 8,
+    "risk": "Medium",
+    "desc": "Popper v2 integration; rename .dropleft/.dropright to .dropstart/.dropend; data-bs-toggle."
+  },
+  {
+    "name": "Modal",
+    "category": "Components",
+    "tier": "Complex",
+    "hours": 12,
+    "risk": "High",
+    "desc": "Remove jQuery; migrate to bootstrap.Modal; replace dismiss icon with .btn-close; data-bs-*."
+  },
+  {
+    "name": "Navs & Tabs",
+    "category": "Components",
+    "tier": "Moderate",
+    "hours": 6,
+    "risk": "Medium",
+    "desc": "Migrate tab switching triggers to data-bs-toggle=\"tab\"; update ARIA roles and tab content."
+  },
+  {
+    "name": "Navbar & Navigation",
+    "category": "Components",
+    "tier": "Moderate",
+    "hours": 8,
+    "risk": "Medium",
+    "desc": "Align internal container constraints; update toggler attributes and dark mode theme bindings."
+  },
+  {
+    "name": "Offcanvas",
+    "category": "Components",
+    "tier": "Moderate",
+    "hours": 6,
+    "risk": "Medium",
+    "desc": "New sidebar/drawer component; implement offcanvas-start/end/top/bottom with backdrop."
+  },
+  {
+    "name": "Pagination",
+    "category": "Components",
+    "tier": "Simple",
+    "hours": 2,
+    "risk": "Low",
+    "desc": "Spacing utilities alignment and focus ring CSS variable styling."
+  },
+  {
+    "name": "Placeholders / Skeletons",
+    "category": "Components",
+    "tier": "Simple",
+    "hours": 3,
+    "risk": "Low",
+    "desc": "New loading state animation component (.placeholder, .placeholder-glow)."
+  },
+  {
+    "name": "Popovers",
+    "category": "Components",
+    "tier": "Complex",
+    "hours": 6,
+    "risk": "Medium",
+    "desc": "Popper v2 placement keys, sanitizer options, native JS initialization."
+  },
+  {
+    "name": "Progress Bars",
+    "category": "Components",
+    "tier": "Simple",
+    "hours": 2,
+    "risk": "Low",
+    "desc": "Progress height and background customizations via CSS custom properties."
+  },
+  {
+    "name": "Scrollspy",
+    "category": "Components",
+    "tier": "Moderate",
+    "hours": 4,
+    "risk": "Low",
+    "desc": "Update target selector attributes to data-bs-spy=\"scroll\" and native refresh API."
+  },
+  {
+    "name": "Spinners",
+    "category": "Components",
+    "tier": "Simple",
+    "hours": 2,
+    "risk": "Low",
+    "desc": "Spinner border and grow animation utilities; button spinner placement."
+  },
+  {
+    "name": "Toasts",
+    "category": "Components",
+    "tier": "Moderate",
+    "hours": 5,
+    "risk": "Medium",
+    "desc": "Replace close button with .btn-close; native JS initialization; flex positioning container."
+  },
+  {
+    "name": "Tooltips",
+    "category": "Components",
+    "tier": "Complex",
+    "hours": 6,
+    "risk": "Medium",
+    "desc": "Popper v2 configuration, DOM container placement, HTML sanitization rules."
+  },
+  {
+    "name": "Form Layout & Grouping",
+    "category": "Forms",
+    "tier": "Moderate",
+    "hours": 8,
+    "risk": "High",
+    "desc": "Completely eliminate .form-group in favor of .mb-3; replace .form-row with .row.g-2."
+  },
+  {
+    "name": "Form Controls (Text/Inputs)",
+    "category": "Forms",
+    "tier": "Moderate",
+    "hours": 6,
+    "risk": "Medium",
+    "desc": "Update input sizing, readonly plain text, color picker inputs, and datalists."
+  },
+  {
+    "name": "Floating Labels",
+    "category": "Forms",
+    "tier": "Moderate",
+    "hours": 5,
+    "risk": "Low",
+    "desc": "Implement native .form-floating wrappers across text fields and select dropdowns."
+  },
+  {
+    "name": "Select Controls",
+    "category": "Forms",
+    "tier": "Moderate",
+    "hours": 5,
+    "risk": "Medium",
+    "desc": "Drop .custom-select in favor of unified native .form-select and sizes."
+  },
+  {
+    "name": "Checkboxes & Radios",
+    "category": "Forms",
+    "tier": "Moderate",
+    "hours": 6,
+    "risk": "High",
+    "desc": "Drop .custom-checkbox and .custom-radio; migrate to unified .form-check and .form-check-input."
+  },
+  {
+    "name": "Switches",
+    "category": "Forms",
+    "tier": "Simple",
+    "hours": 3,
+    "risk": "Medium",
+    "desc": "Drop .custom-switch in favor of .form-check.form-switch."
+  },
+  {
+    "name": "File Browser",
+    "category": "Forms",
+    "tier": "Moderate",
+    "hours": 4,
+    "risk": "Medium",
+    "desc": "Drop complex .custom-file markup; use standard .form-control[type=file]."
+  },
+  {
+    "name": "Range Sliders",
+    "category": "Forms",
+    "tier": "Simple",
+    "hours": 2,
+    "risk": "Low",
+    "desc": "Drop .custom-range; migrate to standard .form-range."
+  },
+  {
+    "name": "Input Groups",
+    "category": "Forms",
+    "tier": "Moderate",
+    "hours": 6,
+    "risk": "Medium",
+    "desc": "Eliminate .input-group-prepend and .input-group-append; use direct child elements."
+  },
+  {
+    "name": "Form Validation",
+    "category": "Forms",
+    "tier": "Moderate",
+    "hours": 6,
+    "risk": "Medium",
+    "desc": "Update client-side validation (.was-validated, .is-valid, .is-invalid, .valid-feedback)."
+  },
+  {
+    "name": "Jumbotron (Dropped)",
+    "category": "Dropped",
+    "tier": "Paradigm Shift",
+    "hours": 5,
+    "risk": "High",
+    "desc": "Completely removed; refactor templates to utility padding/background containers."
+  },
+  {
+    "name": "Media Object (Dropped)",
+    "category": "Dropped",
+    "tier": "Paradigm Shift",
+    "hours": 6,
+    "risk": "High",
+    "desc": "Completely removed; refactor templates to native flexbox (.d-flex, .flex-shrink-0)."
+  },
+  {
+    "name": "Card Decks & Columns (Dropped)",
+    "category": "Dropped",
+    "tier": "Paradigm Shift",
+    "hours": 5,
+    "risk": "High",
+    "desc": "Completely removed; refactor templates to responsive grid .row-cols-*."
+  },
+  {
+    "name": "Block Buttons (Dropped)",
+    "category": "Dropped",
+    "tier": "Simple",
+    "hours": 2,
+    "risk": "Low",
+    "desc": "Completely removed .btn-block; refactor templates to grid wrapper .d-grid."
+  },
+  {
+    "name": "Close Button (.btn-close)",
+    "category": "Utilities",
+    "tier": "Simple",
+    "hours": 2,
+    "risk": "Low",
+    "desc": "Standardize dismiss triggers across all components using standalone .btn-close."
+  },
+  {
+    "name": "Directional Spacing (ms/me/ps/pe)",
+    "category": "Utilities",
+    "tier": "Moderate",
+    "hours": 12,
+    "risk": "Medium",
+    "desc": "Universal codemod across templates: ml/mr -> ms/me, pl/pr -> ps/pe."
+  },
+  {
+    "name": "Directional Text & Floats",
+    "category": "Utilities",
+    "tier": "Moderate",
+    "hours": 6,
+    "risk": "Medium",
+    "desc": "Universal codemod: text-left/right -> text-start/end, float-left/right -> float-start/end."
+  },
+  {
+    "name": "Borders & Rounded Utilities",
+    "category": "Utilities",
+    "tier": "Simple",
+    "hours": 3,
+    "risk": "Low",
+    "desc": "Border-width, border-color CSS variables, .rounded-pill, .rounded-circle."
+  },
+  {
+    "name": "Colors & Backgrounds",
+    "category": "Utilities",
+    "tier": "Simple",
+    "hours": 4,
+    "risk": "Low",
+    "desc": "Contextual text/background utilities, opacity modifiers (.bg-opacity-*)."
+  },
+  {
+    "name": "Display & Stacks",
+    "category": "Utilities",
+    "tier": "Simple",
+    "hours": 4,
+    "risk": "Low",
+    "desc": "Flex display utilities, introduction of vertical/horizontal stacks (.vstack, .hstack)."
+  },
+  {
+    "name": "Embeds / Ratios",
+    "category": "Utilities",
+    "tier": "Moderate",
+    "hours": 4,
+    "risk": "Low",
+    "desc": "Drop .embed-responsive; migrate to modern aspect-ratio helper .ratio and .ratio-16x9."
+  },
+  {
+    "name": "Position & Sizing",
+    "category": "Utilities",
+    "tier": "Simple",
+    "hours": 3,
+    "risk": "Low",
+    "desc": "Top/bottom/start/end position helpers, translate middle utilities, width/height percentages."
+  },
+  {
+    "name": "Visually Hidden Helper",
+    "category": "Utilities",
+    "tier": "Simple",
+    "hours": 2,
+    "risk": "Low",
+    "desc": "Drop legacy .sr-only and .sr-only-focusable; migrate to .visually-hidden."
+  },
+  {
+    "name": "jQuery De-coupling & Removal",
+    "category": "Architecture",
+    "tier": "Paradigm Shift",
+    "hours": 20,
+    "risk": "Severe",
+    "desc": "Complete removal of jQuery dependency; refactor custom scripts to vanilla ES6."
+  },
+  {
+    "name": "Native ES6 Component Lifecycle",
+    "category": "Architecture",
+    "tier": "Complex",
+    "hours": 12,
+    "risk": "High",
+    "desc": "Migrate widget creation to bootstrap[Component].getOrCreateInstance(el)."
+  },
+  {
+    "name": "Data Attribute Namespacing",
+    "category": "Architecture",
+    "tier": "Moderate",
+    "hours": 8,
+    "risk": "Medium",
+    "desc": "Universal template codemod updating data-* attributes to data-bs-* namespace."
+  },
+  {
+    "name": "Popper.js Engine Upgrade",
+    "category": "Architecture",
+    "tier": "Moderate",
+    "hours": 6,
+    "risk": "Medium",
+    "desc": "Migrate from Popper v1 to Popper Core v2, updating options and positioning logic."
+  },
+  {
+    "name": "CSS Custom Properties & Dark Mode",
+    "category": "Architecture",
+    "tier": "Moderate",
+    "hours": 8,
+    "risk": "Low",
+    "desc": "Implement runtime theming via --bs-* variables and native data-bs-theme=\"dark\"."
+  }
+]

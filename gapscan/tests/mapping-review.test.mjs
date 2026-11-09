@@ -1,0 +1,30 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import vm from 'node:vm';
+import {readFile} from 'node:fs/promises';
+import * as resolution from '../engine/resolution.mjs';
+import {applyMigrationPlanning} from '../engine/migration-planning.mjs';
+
+test('failed approval persistence restores correspondence and unavailable effort in the UI',async()=>{
+ const source={id:'a',name:'Button',kind:'component',category:'Actions',value:'',html:'',evidence:[],variants:[],styleProfile:{}};
+ const target={...source,id:'b'};
+ const report={extractions:{old:[source],new:[target]},items:[{id:'change',old:source,new:target,status:'Changed',hours:4,estimateAvailable:true}],summary:{},domains:['Actions']};
+ resolution.initializeMappingResolution(report);
+ applyMigrationPlanning(report);
+ const elements=new Map();
+ const $=id=>{if(!elements.has(id))elements.set(id,{value:'',textContent:'',disabled:false,close(){}});return elements.get(id)};
+ let cards=0,totals=0;
+ const context=vm.createContext({report,$,structuredClone,Date,localEngine:async()=>({...resolution,applyMigrationPlanning}),libraryOperation:async()=>{throw Error('Storage unavailable')},renderCards:()=>cards++,updateTotals:()=>totals++,toast(){},showWorkspacePage(){}});
+ vm.runInContext(await readFile(new URL('../web/mapping-review.js',import.meta.url),'utf8'),context);
+ vm.runInContext('renderMappingReview=()=>{}; mappingDecision={report,source:report.mappingResolution.groups.old[0],target:report.mappingResolution.groups.new[0]};',context);
+ $('mapping-reason').value='Reviewed the counterpart';$('mapping-reviewer').value='Reviewer';
+ await $('mapping-confirm').onclick();
+ assert.equal(report.mappingResolution.rows[0].status,'Suggested');
+ assert.equal(report.items[0].estimateAvailable,false);
+ assert.equal(report.items[0].hours,0);
+ assert.equal(report.items[0].migration.hours,null);
+ assert.equal(report.summary.hours,0);
+ assert.equal($('mapping-decision-status').textContent,'Storage unavailable');
+ assert.equal($('mapping-confirm').disabled,false);
+ assert.equal(cards,1);assert.equal(totals,1);
+});

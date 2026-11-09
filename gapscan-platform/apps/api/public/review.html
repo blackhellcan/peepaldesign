@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Extraction · GapScan</title>
+  <link rel="stylesheet" href="/app/styles.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1 id="title">Your design system, extracted</h1>
+      <p class="lead" id="subtitle">Loading…</p>
+    </div>
+    <div class="row"><a class="button" id="design-system" href="#">Open design system page</a><a class="button" id="extract-again" href="/app/">Extract again</a></div>
+  </header>
+
+  <div class="page-tabs" role="tablist" aria-label="Extraction">
+    <button role="tab" id="tab-overview" aria-controls="view-overview" data-view="overview">Overview</button>
+    <button role="tab" id="tab-foundations" aria-controls="view-foundations" data-view="foundations">Foundations</button>
+    <button role="tab" id="tab-components" aria-controls="view-components" data-view="components">Components <span class="tab-count" id="count-components"></span></button>
+    <button role="tab" id="tab-documentation" aria-controls="view-documentation" data-view="documentation">Documentation <span class="tab-count" id="count-documentation"></span></button>
+    <button role="tab" id="tab-deliver" aria-controls="view-deliver" data-view="deliver">Deliver</button>
+    <button role="tab" id="tab-migrate" aria-controls="view-migrate" data-view="migrate">Migrate <span class="tab-count" id="count-migrate"></span></button>
+  </div>
+
+  <!-- Overview: what was found, what stands out, what to do next. -->
+  <div class="view" id="view-overview" role="tabpanel" aria-labelledby="tab-overview">
+    <div class="grid stats" id="stats"></div>
+    <section class="card" aria-labelledby="next-title">
+      <h2 id="next-title">What you can do next</h2>
+      <div class="next-steps" id="next-steps">
+        <a class="next-step" href="#migrate" data-go="migrate">
+          <strong>Compare with a reference system</strong>
+          <span class="muted" id="next-migrate">See what moving to Material, Polaris, shadcn/ui or others would take, priced component by component.</span>
+        </a>
+        <a class="next-step" href="#deliver" data-go="deliver">
+          <strong>Hand off tokens and Figma</strong>
+          <span class="muted">Download tokens for code (DTCG, CSS, Tailwind, SCSS), build a Figma library, or render brand assets.</span>
+        </a>
+        <a class="next-step" href="#documentation" data-go="documentation">
+          <strong>Complete the documentation</strong>
+          <span class="muted" id="next-documentation">Accessibility, guidelines, principles and more: what exists today and drafts to approve.</span>
+        </a>
+      </div>
+    </section>
+    <section class="card" aria-labelledby="noticed">
+      <div class="card-head"><h2 id="noticed">What we noticed</h2><span class="muted" id="findings-count"></span></div>
+      <div id="findings"></div>
+      <div class="row" style="margin-top:8px"><button type="button" class="quiet" id="more-findings" hidden></button></div>
+    </section>
+    <section class="card" aria-labelledby="coverage"><h2 id="coverage">What was read</h2><ul class="plain" id="coverage-list"></ul></section>
+  </div>
+
+  <!-- Foundations: colours, type, spacing, shape and elevation, and every token. -->
+  <div class="view" id="view-foundations" role="tabpanel" aria-labelledby="tab-foundations" hidden>
+    <section class="card" aria-labelledby="colours"><h2 id="colours">Colours</h2><h3>Roles</h3><div class="swatches" id="roles"></div><h3>Palette</h3><div class="swatches" id="palette"></div></section>
+    <section class="card" aria-labelledby="type"><h2 id="type">Typography</h2><p class="muted" id="type-summary"></p><div id="type-scale"></div></section>
+    <section class="card" aria-labelledby="space"><h2 id="space">Spacing, shape and elevation</h2><p class="muted" id="space-summary"></p><div class="scale" id="spacing"></div><h3>Corner radius</h3><div class="shapes" id="radius"></div><h3>Elevation</h3><div class="shapes" id="shadows"></div></section>
+    <section class="card"><details id="technical"><summary>All tokens, with provenance and evidence</summary>
+      <label for="token-filter">Filter tokens</label><input id="token-filter" type="text" placeholder="color, --brand, space…">
+      <div class="table-wrap"><table id="token-table"></table></div><div class="row" style="margin-top:8px"><button id="more-tokens" type="button" hidden>Show more</button></div>
+    </details></section>
+  </div>
+
+  <!-- Components -->
+  <div class="view" id="view-components" role="tabpanel" aria-labelledby="tab-components" hidden>
+    <section class="card" aria-labelledby="components">
+      <div class="card-head"><h2 id="components">Components</h2><a id="design-system-components" href="#">See them laid out with variants and screenshots</a></div>
+      <div class="table-wrap"><table id="component-table"></table></div>
+    </section>
+  </div>
+
+  <!-- Documentation: the six objects a complete system documents. -->
+  <div class="view" id="view-documentation" role="tabpanel" aria-labelledby="tab-documentation" hidden>
+    <section class="card docs-card" aria-labelledby="objects-title">
+      <div class="card-head">
+        <div><h2 id="objects-title">System completeness</h2>
+          <p class="muted docs-intro">What a complete design system documents, and how much of it exists today. Drafts only count once someone approves them.</p></div>
+        <div class="segmented" role="group" aria-label="Show">
+          <button type="button" data-filter="all" aria-pressed="true">All sections</button>
+          <button type="button" data-filter="review" aria-pressed="false">Needs approval <span class="tab-count" id="review-count"></span></button>
+        </div>
+      </div>
+      <div id="reviewer-row" hidden><label for="reviewer">Your name or email, recorded with each approval</label><input id="reviewer" type="text" autocomplete="email" placeholder="you@company.com"></div>
+      <div class="docs" id="objects"><p class="muted">Loading…</p></div>
+    </section>
+  </div>
+
+  <!-- Deliver: files for code, Figma, brand assets. -->
+  <div class="view" id="view-deliver" role="tabpanel" aria-labelledby="tab-deliver" hidden>
+    <section class="card" aria-labelledby="handoff"><h2 id="handoff">Tokens for code</h2><p class="muted">Generated from this extraction. Unresolved values are left out; inferred values are marked.</p><div class="row" id="exports"></div></section>
+
+    <section class="card" aria-labelledby="figma-card-title" id="export-figma">
+      <h2 id="figma-card-title">Figma</h2>
+      <p class="muted">Optional. GapScan never changes a Figma file without you: choose how you want this system in Figma.</p>
+      <div class="choice" role="radiogroup" aria-label="How to use Figma">
+        <label class="choice-option"><input type="radio" name="figma-mode" value="library" checked>
+          <span><strong>Build a library in a file</strong><span class="muted">Variables, text and effect styles, and components with their variants, added by the GapScan Importer plugin in a file you open.</span></span></label>
+        <label class="choice-option"><input type="radio" name="figma-mode" value="sync">
+          <span><strong>Update an existing file's variables</strong><span class="muted">Preview the exact variable changes for a file you already have, then confirm. Needs a Figma token on the server.</span></span></label>
+      </div>
+      <div id="figma-library">
+        <h3 id="export-figma-title">Build a library</h3>
+        <ol class="steps">
+          <li><a class="button primary" id="figma-export" href="#" download>Download the Figma export</a></li>
+          <li>First time only: <a href="/v1/figma-plugin.zip" download>download the GapScan Importer plugin</a>, unzip it, then in the Figma desktop app choose Plugins → Development → Import plugin from manifest… and pick <code>manifest.json</code>.</li>
+          <li>Open the Figma file you want, run Plugins → Development → GapScan Importer, and choose the export.</li>
+        </ol>
+      </div>
+      <div id="figma-sync" hidden>
+        <h3 id="figma-title">Update variables</h3>
+        <p class="muted">Preview first: nothing is written until you confirm the exact changes shown.</p>
+        <form id="figma-form" class="row"><input type="url" name="fileUrl" placeholder="https://www.figma.com/design/…" required style="flex:1 1 320px"><button type="submit">Preview changes</button></form>
+        <div id="figma-result" style="margin-top:12px"></div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="assets-title"><h2 id="assets-title">Brand assets</h2><p class="muted">Business cards, letterheads, social images, a slide template and email layouts, rendered from your brand kit. Each file lists the checks it passed.</p>
+      <form id="asset-form" class="assumptions"><label>Template<select name="template" id="asset-template"></select></label><label>Brand name<input type="text" name="brandName" value="Your brand"></label><div id="asset-fields" style="display:contents"></div><button class="primary" type="submit">Generate</button></form>
+      <div id="asset-result" style="margin-top:12px"></div></section>
+  </div>
+
+  <!-- Migrate: reports already run, starting a new comparison, and the product code that sharpens it. -->
+  <div class="view" id="view-migrate" role="tabpanel" aria-labelledby="tab-migrate" hidden>
+    <section class="card" aria-labelledby="reports-title" id="reports-card" hidden>
+      <h2 id="reports-title">Your reports</h2>
+      <ul class="plain" id="reports"></ul>
+    </section>
+    <section class="card" aria-labelledby="compare"><h2 id="compare">Compare against a reference system</h2><p class="muted">Ranked by how many of your components have a likely counterpart. This is a suggestion; choose any.</p><div class="recs" id="recs"><p class="muted">Checking the library…</p></div><div class="log" id="scan-log" hidden aria-live="polite"></div></section>
+    <section class="card" aria-labelledby="impact-title"><h2 id="impact-title">Application impact <span class="pill">Optional</span></h2><p class="muted">Add your product's code to see where each component is used. Comparisons then leave unused components out and price the call sites that need updating.</p>
+      <form id="impact-form" class="row"><input type="url" name="repo" placeholder="https://github.com/your-org/your-app (public)" style="flex:1 1 280px"><span class="muted">or</span><input type="file" name="zip" accept=".zip"><button type="submit">Add and scan</button></form>
+      <div id="impact-result" style="margin-top:12px"></div></section>
+  </div>
+</main>
+<script src="/app/common.js"></script>
+<script src="/app/review.js"></script>
+<script src="/app/docs.js"></script>
+<script src="/app/impact.js"></script>
+<script src="/app/assets.js"></script>
+</body>
+</html>

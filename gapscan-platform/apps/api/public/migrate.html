@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Migrate · GapScan</title>
+  <link rel="stylesheet" href="/app/styles.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1>Migrate</h1>
+      <p class="lead" id="lead">Find the design system closest to yours, and see what moving to it takes, component by component.</p>
+    </div>
+  </header>
+
+  <section class="card recommend" id="recommend" aria-labelledby="best-title">
+    <h2 id="best-title">Checking the library…</h2>
+    <p class="muted" id="best-reason"></p>
+    <div class="row"><button class="primary" id="best-go" type="button" hidden>See what it takes</button><a class="button" id="best-open" hidden href="#">Open your report</a><a id="best-site" class="muted" hidden target="_blank" rel="noopener">About it</a></div>
+    <div class="progress-inline" id="best-progress" hidden><span class="kind-busy" aria-hidden="true"></span><span id="best-status" aria-live="polite"></span></div>
+    <p class="error" id="best-error" role="alert"></p>
+  </section>
+
+  <section class="card" id="reports-card" aria-labelledby="reports-title" hidden>
+    <h2 id="reports-title">Your reports</h2>
+    <ul class="plain" id="reports"></ul>
+  </section>
+
+  <section class="card" aria-labelledby="others-title">
+    <details id="others">
+      <summary><h2 id="others-title" class="inline-h2">Compare with another design system</h2></summary>
+      <p class="muted">Ranked by how many of your components have a likely equivalent. Any of them can be compared.</p>
+      <div class="recs" id="recs"></div>
+    </details>
+  </section>
+
+  <section class="card" aria-labelledby="sharpen-title">
+    <details id="sharpen">
+      <summary><h2 id="sharpen-title" class="inline-h2">Make estimates sharper with your app's code <span class="pill">Optional</span></h2></summary>
+      <p class="muted">Add your product's code and GapScan counts where each component is used. Reports then leave unused components out and include the call sites to update. Your code is read, never run.</p>
+      <form id="impact-form" class="row"><input type="url" name="repo" placeholder="https://github.com/your-org/your-app (public)" style="flex:1 1 280px"><span class="muted">or</span><input type="file" name="zip" accept=".zip"><button type="submit">Add and scan</button></form>
+      <div id="impact-result" style="margin-top:12px"></div>
+    </details>
+  </section>
+</main>
+<script src="/app/common.js"></script>
+<script src="/app/migrate.js"></script>
+<script src="/app/impact.js"></script>
+</body>
+</html>

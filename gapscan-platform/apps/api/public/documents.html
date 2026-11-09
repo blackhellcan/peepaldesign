@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Documents · GapScan</title>
+  <link rel="stylesheet" href="/app/styles.css">
+</head>
+<body>
+<main class="wide">
+  <header class="top">
+    <div>
+      <h1>Documents</h1>
+      <p class="lead" id="lead">The documents a complete design system has, written from what GapScan found in yours. What your system doesn’t establish yet is highlighted as missing.</p>
+    </div>
+    <div class="row">
+      <button class="primary" id="generate" type="button" hidden>Write with AI</button>
+      <a class="button" id="to-pdf" href="#">Make a PDF</a>
+    </div>
+  </header>
+  <div class="notice gen-status" id="gen-status" role="status" hidden></div>
+  <section class="card docs-card" aria-labelledby="docs-title">
+    <h2 id="docs-title" class="visually-hidden">Your documents</h2>
+    <div class="docs" id="reader"><p class="muted">Loading…</p></div>
+  </section>
+</main>
+<script src="/app/common.js"></script>
+<script src="/app/documents.js"></script>
+
+</body>
+</html>

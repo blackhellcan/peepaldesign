@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design system · GapScan</title>
+  <link rel="stylesheet" href="/app/styles.css">
+</head>
+<body>
+<main class="wide">
+  <header class="top system-head">
+    <div class="title-block">
+      <div class="title-edit" id="title-show">
+        <h1 id="system-name">Your design system</h1>
+        <button type="button" class="quiet" id="rename">Rename</button>
+      </div>
+      <form class="title-edit" id="rename-form" hidden>
+        <label class="visually-hidden" for="rename-input">Name</label>
+        <input id="rename-input" type="text" maxlength="200" required>
+        <button class="primary" type="submit">Save</button>
+        <button type="button" id="rename-cancel">Cancel</button>
+      </form>
+      <p class="lead" id="system-meta">Loading…</p>
+      <p class="error" id="system-error" role="alert"></p>
+    </div>
+    <a class="button" id="update" href="/app/">Add sources or update</a>
+  </header>
+
+  <nav class="actions" aria-label="What you can do">
+    <a class="action" id="action-export" href="#">
+      <span class="action-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3.5"/><path d="m7.5 8 4.5-4.5L16.5 8"/><path d="M5 13.5v5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-5"/></svg></span>
+      <strong>Export</strong>
+      <span class="muted">Figma, PDF, or tokens for code.</span>
+    </a>
+    <a class="action" id="action-documents" href="#">
+      <span class="action-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3.5H7A1.5 1.5 0 0 0 5.5 5v14A1.5 1.5 0 0 0 7 20.5h10a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3.5V8h4.5"/><path d="M9 12.5h6M9 16h6"/></svg></span>
+      <strong>Documents</strong>
+      <span class="muted" id="documents-note">Accessibility, guidelines, principles, brand and more.</span>
+    </a>
+    <a class="action" id="action-migrate" href="#">
+      <span class="action-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h14.5"/><path d="m15 4.5 3.5 3.5-3.5 3.5"/><path d="M20 16H5.5"/><path d="m9 12.5-3.5 3.5L9 19.5"/></svg></span>
+      <strong>Migrate</strong>
+      <span class="muted" id="migrate-note">See which design system is closest, and what moving to it takes.</span>
+    </a>
+  </nav>
+  <p class="more-tools muted">Also: <a id="more-tools" href="#">brand assets</a> such as business cards, letterheads and social images.</p>
+
+  <section class="card add-missing" id="add-missing" aria-labelledby="missing-title">
+    <div class="card-head">
+      <h2 id="missing-title">Add what we missed</h2>
+      <span class="muted" id="missing-found"></span>
+    </div>
+    <p class="muted card-intro">If a component or style is missing, add its source code here, then update your design system. Your website or files are not read again unless they changed.</p>
+    <div id="missing-chips-wrap" hidden>
+      <p class="chips-label">Not found yet: <span class="muted">pick one to add it</span></p>
+      <div class="chips" id="missing-chips"></div>
+    </div>
+
+    <div class="segmented add-tabs" role="tablist" aria-label="What to add">
+      <button type="button" role="tab" aria-selected="true" data-add="code">Component code</button>
+      <button type="button" role="tab" aria-selected="false" data-add="tokens">Colours, type and spacing</button>
+    </div>
+
+    <form id="add-code-form" class="add-panel" data-panel="code" novalidate>
+      <div class="add-row">
+        <label>File name<input id="add-code-name" type="text" value="Component.tsx" maxlength="200"></label>
+        <span class="muted add-or">or</span>
+        <label class="button add-upload" for="add-code-files">Upload component files</label>
+        <input id="add-code-files" class="visually-hidden" type="file" multiple accept=".tsx,.ts,.jsx,.js,.mjs,.vue,.svelte,.css,.scss,.sass,.less,.html,.htm,.json">
+      </div>
+      <label for="add-code-text">Source code</label>
+      <textarea id="add-code-text" placeholder="export function Checkbox({checked, disabled, label}: CheckboxProps) { … }  or  .checkbox { … }"></textarea>
+      <p class="muted fine">React, Vue, Svelte, HTML or CSS. GapScan reads the code to find the component's options, sizes and states; it never runs it.</p>
+      <div class="row"><button type="submit">Add this code</button></div>
+    </form>
+
+    <form id="add-tokens-form" class="add-panel" data-panel="tokens" hidden novalidate>
+      <div id="token-rows" class="token-rows"></div>
+      <div class="row"><button type="button" class="quiet" id="add-token-row">+ Another</button><button type="submit">Add these</button></div>
+    </form>
+
+    <p class="error" id="add-error" role="alert"></p>
+    <div id="pending-wrap" hidden>
+      <h3>Not in your design system yet</h3>
+      <ul class="plain source-cards" id="pending-list"></ul>
+    </div>
+    <div class="row update-row">
+      <button class="primary" id="update-system" type="button" disabled>Update my design system</button>
+      <span class="progress-inline" id="update-progress" hidden><span class="kind-busy" aria-hidden="true"></span><span id="update-status" aria-live="polite"></span></span>
+    </div>
+  </section>
+
+  <section class="preview" aria-labelledby="preview-title">
+    <div class="preview-head">
+      <h2 id="preview-title">Your design system</h2>
+      <a id="preview-open" href="#" target="_blank" rel="noopener">Open in a new tab</a>
+    </div>
+    <iframe id="preview" title="Your design system: colours, type, spacing and components" sandbox="allow-same-origin" loading="lazy"></iframe>
+  </section>
+</main>
+<script src="/app/common.js"></script>
+<script src="/app/system.js"></script>
+</body>
+</html>

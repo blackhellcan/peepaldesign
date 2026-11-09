@@ -1,0 +1,14 @@
+{
+  "name": "@gapscan/codemod",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": {
+    "@gapscan/gapscan": "0.1.0",
+    "@gapscan/library": "0.1.0",
+    "@gapscan/schema": "0.1.0",
+    "@gapscan/usage": "0.1.0",
+    "typescript": "^5.9.0"
+  }
+}
