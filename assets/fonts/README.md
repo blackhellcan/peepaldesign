@@ -8,7 +8,8 @@ subheadings and visual accent.
 |---|---|---|
 | `Archivo-var.woff2` | fallback for body text | on disk |
 | `Archivo-Italic-var.woff2` | fallback for body italics | on disk |
-| `Inter-var.woff2` | **primary** — body copy, sitewide | **NOT ON DISK** |
+| `Inter-var.woff2` | **primary** — body copy, sitewide | on disk (2026-11-18: official Inter variable, weight + slant axes, 319 KB, from the WordPress Twenty Twenty-Four theme's bundled copy, OFL) |
+| `Caveat-500.woff2` | the handwritten note on `info/index.html` only | on disk (2026-11-18: Google Fonts latin subset, 50 KB) |
 | `Inter-Italic-var.woff2` | primary italics | **NOT ON DISK** |
 | `RedHatDisplay-var.woff2` | **secondary** — h1–h4, and a few title spans | on disk |
 | `RedHatDisplay-Italic-var.woff2` | secondary italics (the accent tokens in headings) | on disk |

@@ -25,7 +25,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Globbed rather than listed: the site went from one page to eleven and a
 # hand-kept list silently fell behind, so every root-level .html ships.
 # Documentation and config stay out because they are not .html at the root.
-INCLUDE=(assets)
+INCLUDE=(assets info)   # info/ holds the one-pager, served at /info/
 while IFS= read -r page; do INCLUDE+=("$page"); done < <(cd "$(dirname "${BASH_SOURCE[0]}")" && ls -1 *.html)
 
 # Dropped from the staged copy even though they live under an included path.

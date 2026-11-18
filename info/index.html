@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Info | Peepal Design</title>
+<meta name="description" content="We partner with customer-obsessed companies to shape how humans and AI work together.">
+<style>
+/* ---------- faces: the main site's (../assets/css/contact-sheet.css) — Inter body, Geist headings, Archivo for edge-code labels ---------- */
+@font-face{font-family:'Caveat';src:url('../assets/fonts/Caveat-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}   /* the handwritten note only; latin subset, self-hosted */
+@font-face{font-family:'Archivo';src:url('../assets/fonts/Archivo-var.woff2') format('woff2-variations');font-weight:100 900;font-stretch:62% 125%;font-style:normal;font-display:swap}
+@font-face{font-family:'Inter';src:local('Inter Variable'),local('InterVariable'),local('Inter'),url('../assets/fonts/Inter-var.woff2') format('woff2-variations');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Geist';src:local('Geist Variable'),local('Geist'),url('../assets/fonts/Geist-var.woff2') format('woff2-variations');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Geist';src:local('Geist Variable Italic'),local('Geist Italic'),url('../assets/fonts/Geist-Italic-var.woff2') format('woff2-variations');font-weight:100 900;font-style:italic;font-display:swap}
+/* ---------- tokens: the root theme flips as sections cross mid-screen ---------- */
+:root{
+  /* main-site darkroom: stock ground, silver ramp, amber mark */
+  --void:#060607; --stock:#0B0B0C; --bed:#121214; --bed-2:#17171A;
+  --silver-50:#F4F3F0; --silver-200:#D3D2CD; --silver-400:#A8A79F; --silver-600:#87867F;
+  --mark:#FFA54A; --on-mark:#2B1607; --rule:rgba(244,243,240,.11); --rule-strong:rgba(244,243,240,.20);
+  --page-bg:var(--stock); --page-ink:var(--silver-50); --muted:var(--silver-400); --line:var(--rule);
+  --btn-line:rgba(244,243,240,.36);   /* 3.1:1 on stock: a button edge must clear 3:1 (WCAG 1.4.11) */
+  /* T.R.U.S.T.: one colour per principle, two extra for the phases that share Co-Creation — the only place they are set */
+  --t-t:#F97316; --t-r:#F5B301; --t-u:#12B886; --t-u2:#4FBF1A; --t-u3:#16B3A3; --t-s:#9B6DF2; --t-t2:#7CCB2B;
+  --card:var(--bed-2); --accent:var(--mark); --cyan:#1CB4C6;
+  --f-body:'Inter','Archivo',system-ui,sans-serif; --f-head:'Geist','Inter','Archivo',sans-serif; --f-edge:'Archivo',sans-serif; --wide:min(94vw,1560px); --text:min(88vw,1180px);
+  --p:1; --vel:0; --hp:0;
+}
+:root[data-theme=light]{
+  /* the lit sections: silver-50 paper, stock ink; amber shaded to #9A5A1C so labels hold 4.9:1 */
+  --page-bg:var(--silver-50); --page-ink:var(--stock); --muted:rgba(11,11,12,.66); --line:rgba(11,11,12,.12); --btn-line:rgba(11,11,12,.45);   /* 3.1:1 on silver-50 */
+  --card:#FFFFFF; --accent:#9A5A1C;
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{font:400 1.0625rem/1.65 var(--f-body);font-synthesis-weight:none;background:var(--page-bg);color:var(--page-ink);
+  transition:background-color 1.1s cubic-bezier(.65,0,.35,1),color 1.1s cubic-bezier(.65,0,.35,1);overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--f-head)}
+h1,h2,h3{font-weight:640;letter-spacing:-.035em;line-height:1.04;text-wrap:balance}
+::selection{background:var(--mark);color:var(--on-mark)}
+/* edge-code lettering: the main site's condensed, tracked caps for every label */
+.kicker,.cue,.hero small,.phase h4,.fw em,.fw-labels span,.tcard dt,.cop div span,.axis,.between,.pledge,.fw-o b,.fw-h{
+  font-family:var(--f-edge);font-stretch:66%;font-weight:640;text-transform:uppercase;letter-spacing:.2em;font-variant-numeric:tabular-nums}
+h2{font-size:clamp(2.25rem,5.2vw,4.75rem);line-height:1.02}
+.big{font-size:clamp(3rem,8vw,8.5rem);line-height:.95}
+.kicker{font-size:.75rem;color:var(--accent)}
+.lede{font-size:clamp(1.125rem,1.6vw,1.5rem);line-height:1.5;color:var(--muted);max-width:44ch}
+.acc{color:var(--accent)}
+.wide{width:var(--wide);margin-inline:auto}
+.text{width:var(--text);margin-inline:auto}
+section{padding-block:clamp(5rem,14vh,11rem);position:relative}
+.head{display:grid;gap:1.25rem;margin-bottom:clamp(2.5rem,7vh,5rem)}
+
+/* ---------- reveals (.fx = motion allowed, any width; .desk = 1024px and up) ---------- */
+/* fallback reveal, used only if GSAP fails to load (html.css-reveal); with GSAP the "develop" reveal in the script owns .rise */
+.fx.css-reveal .rise{opacity:0;translate:0 32px;transition:opacity .9s cubic-bezier(.2,.7,.2,1),translate .9s cubic-bezier(.2,.7,.2,1);
+  transition-delay:calc(var(--i,0)*80ms)}
+.fx.css-reveal .rise.in{opacity:1;translate:0 0}
+/* Lenis smooth scroll (its required base rules) */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:clip}
+
+/* ---------- header ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;
+  padding:1.5rem max(3vw,1rem);transition:padding .4s,background-color .4s,backdrop-filter .4s}
+.nav img{height:34px;width:auto;transition:height .4s}
+.nav[data-scrolled]{padding-block:.7rem;background:color-mix(in srgb,var(--page-bg) 72%,transparent);backdrop-filter:blur(14px)}
+.nav[data-scrolled] img{height:26px}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.25rem;border:1px solid var(--btn-line);border-radius:99px;
+  text-decoration:none;font-size:.9375rem;font-weight:500;font-family:var(--f-body);transition:background-color .3s,color .3s,border-color .3s}
+.btn:hover,.btn:focus-visible{background:var(--page-ink);color:var(--page-bg);border-color:var(--page-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* ---------- 1. hero: pinned, the page slides over it ---------- */
+.hero{position:sticky;top:0;height:100svh;display:grid;place-items:center;text-align:center;overflow:hidden;
+  background:var(--void);color:var(--silver-50);--beam:11svh}
+.beam{position:absolute;inset:0;transform-origin:50% var(--beam);scale:calc(1 + var(--hp)*.5);
+  background:radial-gradient(64% 62% at 50% calc(var(--beam) + 2svh),rgba(255,165,74,.9),rgba(179,116,52,.5) 36%,transparent 72%);
+  -webkit-mask:linear-gradient(#0000 var(--beam),#000 calc(var(--beam) + .4svh));mask:linear-gradient(#0000 var(--beam),#000 calc(var(--beam) + .4svh));
+  animation:beam 2s cubic-bezier(.2,.7,.2,1) both}
+.beam::before{content:"";position:absolute;inset:var(--beam) 14% auto;height:12%;filter:blur(14px);
+  background:radial-gradient(50% 100% at 50% 0,rgba(255,192,128,.6),transparent 72%)}
+@keyframes beam{from{opacity:0;transform:scaleX(.25)}to{opacity:1;transform:none}}
+.hero-in{position:relative;display:grid;gap:1.75rem;justify-items:center;padding:9vh 4vw 0;
+  translate:0 calc(var(--hp)*-6vh);scale:calc(1 - var(--hp)*.06)}
+.hero h1{font-size:clamp(2.75rem,8.8vw,10.5rem);line-height:.97;letter-spacing:-.045em}
+.hero h1 span{display:inline-block;animation:up 1s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.5s + var(--i)*90ms)}
+.hero h1 b{font-weight:inherit;color:var(--mark)}
+.hero p{max-width:60ch;font-size:clamp(1.0625rem,1.4vw,1.4375rem);line-height:1.45;color:var(--silver-200);opacity:calc(1 - var(--hp)*1.6);animation:up 1s 1.1s both}
+@keyframes up{from{opacity:0;transform:translateY(.5em)}to{opacity:1;transform:none}}
+.cue{position:absolute;bottom:2rem;left:50%;translate:-50%;font-size:.6875rem;
+  color:var(--silver-400);opacity:calc(1 - var(--hp)*3)}
+.cue::after{content:"";display:block;width:1px;height:38px;margin:.6rem auto 0;background:currentColor;animation:cue 1.8s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.hero small{position:absolute;bottom:2.2rem;font-size:.6875rem;color:var(--silver-400);opacity:calc(1 - var(--hp)*3)}
+.hold{height:55vh}
+main{position:relative;z-index:2;background:var(--page-bg);transition:background-color 1.1s cubic-bezier(.65,0,.35,1)}
+
+/* ---------- 2. the question: words light up with the scroll ---------- */
+.big,.quote p,.marq p{font-family:var(--f-head);font-weight:640}
+.ask p.big{font-size:clamp(2.25rem,5.6vw,5.75rem);line-height:1.04;letter-spacing:-.035em}
+.ask .w{transition:opacity .25s linear}
+.ask em{font-style:normal;color:var(--accent)}
+.ask .lede{margin-top:clamp(2rem,6vh,4rem);max-width:52ch;color:var(--page-ink)}
+
+/* ---------- 3. numbers ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.stat{padding:2rem 1.5rem 2.5rem 0;border-bottom:1px solid var(--line)}
+.stat b{display:block;font-family:var(--f-edge);font-stretch:70%;font-weight:700;font-size:clamp(3rem,7.4vw,7.5rem);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted)}
+.net{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.net>div{background:var(--card);border-radius:20px;padding:1.75rem;min-height:15rem;display:flex;flex-direction:column;gap:.5rem}
+.net figure{margin:0 0 auto;height:88px;display:flex;align-items:center;padding-bottom:1.25rem;box-sizing:content-box}
+.net figure img{width:auto;max-width:100%}
+.net h3{font-size:1.25rem;font-weight:620;letter-spacing:-.03em;line-height:1.18}
+.net p{color:var(--muted);font-size:.9375rem}
+
+/* ---------- 4. logo wall with swapping tiles ---------- */
+.wall{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.tile{aspect-ratio:4/3;background:var(--bed);border-radius:18px;display:grid;place-items:center;overflow:hidden}
+.tile img{grid-area:1/1;max-width:58%;max-height:34%;transition:opacity .6s,translate .6s cubic-bezier(.2,.7,.2,1)}
+.tile img+img,.tile.b img:first-child{opacity:0;translate:0 60%}
+.tile.b img+img{opacity:1;translate:0 0}
+.tile.b img:first-child{translate:0 -60%}
+
+/* ---------- 5. work: horizontal panels ---------- */
+.work{padding-block:0}
+.stage{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;gap:clamp(1.5rem,4vh,3rem);overflow:hidden}
+.track{display:flex;gap:clamp(12px,1.6vw,28px);padding-inline:3vw;will-change:transform}
+.case{flex:none;width:min(70vw,1080px);height:min(64vh,620px);border-radius:28px;overflow:hidden;position:relative;color:var(--silver-50);
+  background:radial-gradient(110% 90% at 72% 0,#3a2614,var(--bed) 62%);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(1.5rem,3vw,3rem)}
+.case img{position:absolute;inset:8% 6% 30% 6%;width:88%;height:62%;object-fit:contain;transition:scale .8s cubic-bezier(.2,.7,.2,1)}
+.case:hover img{scale:1.04}
+.case::after{content:"";position:absolute;inset:50% 0 0;background:linear-gradient(transparent,rgba(11,11,12,.92) 62%)}
+.case>div{position:relative;z-index:1;display:grid;gap:.4rem;max-width:46ch}
+.case h3{font-size:clamp(1.5rem,2.6vw,2.5rem);line-height:1.05}
+.case p{color:var(--silver-200)}
+.case .kicker{color:var(--mark)}
+.quote{flex:none;width:min(70vw,1080px);display:grid;align-content:center;padding-inline:4vw}
+.quote p{font-size:clamp(2.25rem,5vw,5rem);line-height:1.02;letter-spacing:-.035em}
+
+/* ---------- 6. our own copilots: cards rise into a fanned row ---------- */
+.fan{padding-block:0}
+.fan .stage{align-items:center;text-align:center}
+.fan h2{max-width:none}
+.deck{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:var(--wide)}
+.fan{--s:clamp(320px,min(40vw,62vh),640px)}
+.cop{background:var(--bed-2);color:var(--silver-50);border-radius:22px;overflow:hidden;text-align:left;display:flex;flex-direction:column;cursor:zoom-in;
+  transition:scale .35s cubic-bezier(.2,.7,.2,1);box-shadow:0 30px 60px -30px rgba(0,0,0,.55)}
+.cop img{width:100%;aspect-ratio:7/4;object-fit:cover;object-position:top;background:#fff}
+.cop div{padding:1rem 1.4rem 1.25rem;display:grid;gap:.3rem}
+.cop div span{color:var(--mark);font-size:.6875rem}
+.cop h3{font-size:clamp(1.375rem,1.8vw,1.75rem);line-height:1.05}
+.cop p{color:var(--silver-400);font-size:.9375rem}
+.lb{border:0;padding:0;background:none;max-width:94vw;max-height:92vh;overflow:visible}
+.lb::backdrop{background:rgba(6,6,7,.88);backdrop-filter:blur(6px)}
+.lb img{display:block;max-width:94vw;max-height:84vh;border-radius:14px;box-shadow:0 40px 80px -20px #000}
+.lb p{color:var(--silver-50);text-align:center;margin-top:1rem;font-size:1.125rem}
+
+/* ---------- 7. T.R.U.S.T.: stacking cards that dim ---------- */
+.trust{padding-block:0}
+.tcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.tcard{background:var(--bed-2);color:var(--silver-50);border:1px solid var(--rule);border-radius:24px;padding:clamp(1.5rem,3.2vh,2.5rem);display:flex;flex-direction:column;gap:.75rem}
+.tcard>b{font-family:var(--f-head);font-weight:640;font-size:clamp(5rem,15vh,11rem);line-height:.8;letter-spacing:-.05em;color:var(--c);margin-bottom:auto;padding-bottom:1.5rem}
+.tcard h3{font-size:clamp(1.6rem,2.3vw,2.4rem);line-height:1.02}
+.tcard .mean{font-size:clamp(1rem,1.2vw,1.2rem);line-height:1.45;color:var(--silver-200)}
+.tcard dl{display:grid;gap:.25rem;margin-top:.5rem;padding-top:1rem;border-top:1px solid var(--rule-strong);font-size:.9375rem}
+.tcard dt{color:var(--c);font-size:.6875rem}
+.tcard dd{color:var(--silver-400);margin:0}
+.fw-view{overflow-x:auto}
+.fw{display:grid;grid-template-columns:repeat(6,220px);grid-template-rows:auto auto 64px auto auto;column-gap:28px;row-gap:22px;width:max-content;color:var(--silver-50);padding:4px 24px}
+.fw>div{position:relative;isolation:isolate}
+.fw-p{display:flex;align-items:center;gap:.75rem}
+.fw-p b{flex:none;width:44px;height:44px;border-radius:50%;background:var(--c);display:grid;place-items:center;font-weight:600;color:var(--stock);font-size:1.25rem}
+.fw-p span{font-family:var(--f-head);font-weight:620;font-size:1rem;line-height:1.2}
+.fw-a,.fw-d{border-top:2px solid color-mix(in srgb,var(--c) calc(var(--f,0)*100%),var(--rule-strong));padding-top:.9rem}
+.fw em{display:block;font-style:normal;font-size:.6875rem;color:var(--silver-400);margin-bottom:.5rem}
+.fw ul{list-style:none;padding:0;font-size:.9375rem;line-height:1.5}
+.fw li{padding-left:.95rem;position:relative}
+.fw li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--c)}
+.fw-h{display:flex;align-items:center;padding:0 1rem;font-size:.875rem;letter-spacing:.14em;color:var(--stock)}
+.fw-h span{position:relative}
+.fw-h::before{content:"";position:absolute;inset:0;background:var(--c);clip-path:polygon(0 6%,100% 50%,0 94%);z-index:-1}
+.fw-h.l{justify-content:flex-end}
+.fw-h.l::before{clip-path:polygon(100% 6%,0 50%,100% 94%)}
+.fw-o{border-top:1px solid var(--rule-strong);padding-top:.9rem;text-align:center}
+.fw-o b{display:block;font-size:.75rem;color:var(--c);margin-bottom:.35rem}
+.fw-o p{font-size:.875rem;line-height:1.5;color:var(--silver-400);max-width:30ch;margin-inline:auto}
+.fw-labels{display:none}
+.fx .trust{height:620vh}
+.fx .trust .stage{display:block}
+.fx .tcards{display:block;position:absolute;left:max(3vw,1rem);top:6.5rem;bottom:4vh;width:min(36vw,560px);will-change:transform}
+.fx .tcard{position:absolute;inset:0;transform-origin:50% 0;will-change:transform}
+.fx .chart{position:absolute;top:6.5rem;bottom:4vh;right:max(3vw,1rem);--lw:118px}
+.fx .fw-labels{display:block;position:absolute;left:0;top:0;bottom:0;width:var(--lw)}
+.fx .fw-labels span{position:absolute;left:0;translate:0 -50%;font-size:.6875rem;color:var(--silver-400)}
+.fx .fw-view{position:absolute;left:var(--lw);right:0;top:0;bottom:0;overflow:hidden;
+  -webkit-mask:linear-gradient(90deg,#0000,#000 28px,#000 calc(100% - 28px),#0000);mask:linear-gradient(90deg,#0000,#000 28px,#000 calc(100% - 28px),#0000)}
+.fx .fw{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+.fx .fw em{display:none}
+.fx .fw>div{will-change:opacity,translate}
+html:not(.fx) .trust .stage{width:var(--wide);margin-inline:auto;gap:10px;padding-top:0}
+.pledge{display:inline-block;padding:.5rem 1rem;border-radius:8px;background:var(--mark);color:var(--on-mark);font-size:.75rem;width:fit-content}
+
+/* ---------- 8. process: sticky heading beside the phases ---------- */
+.split{display:grid;grid-template-columns:5fr 7fr;gap:clamp(2rem,6vw,7rem);align-items:start}
+.split>.head{position:sticky;top:7rem}
+.phase{display:grid;grid-template-columns:3.5rem 1fr 1fr;gap:1.5rem;padding-block:2.25rem;border-top:1px solid var(--line)}
+.phase>span{color:var(--accent);font-family:var(--f-edge);font-stretch:70%;font-weight:700;font-variant-numeric:tabular-nums}
+.phase h3{grid-column:2/-1;font-size:clamp(1.9rem,3.6vw,3.25rem);line-height:1.04}
+.phase h4{font-size:.6875rem;color:var(--muted);margin-bottom:.6rem}
+.phase ul{list-style:none;padding:0;font-size:.9688rem;line-height:1.7}
+.phase div:first-of-type{grid-column:2}
+
+/* ---------- 9. ways we partner ---------- */
+.axis{display:flex;justify-content:space-between;color:var(--accent);font-size:.75rem}
+.rail{height:1px;background:var(--line);margin:1.25rem 0 2.5rem;position:relative}
+.rail i{position:absolute;top:-7px;left:calc(var(--p)*100%);width:15px;height:15px;margin-left:-7px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 0 8px color-mix(in srgb,var(--accent) 22%,transparent)}
+.models{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.model{background:var(--card);border:1px solid transparent;border-radius:22px;padding:2rem;min-height:min(21rem,38vh);display:flex;flex-direction:column;gap:1rem;
+  transition:border-color .4s,translate .5s cubic-bezier(.2,.7,.2,1),opacity .4s}
+.model>span{width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--rule-strong);display:grid;place-items:center;font-size:.9375rem;font-family:var(--f-edge);font-stretch:70%;font-weight:700}
+.model h3{font-size:1.5rem;line-height:1.12;margin-top:auto}
+.model p{color:var(--muted);font-size:.9688rem}
+.fx .models[data-on] .model{opacity:.5}
+.fx .models[data-on] .model.on{opacity:1;border-color:var(--accent);translate:0 -12px}
+.partner{padding-block:0}
+.partner .head{margin-bottom:clamp(1.5rem,5vh,3.5rem)}
+.between{text-align:center;margin-top:2.5rem;color:var(--muted);font-size:.75rem}
+
+/* ---------- 10. team: photo cards on an arc, each rotated about a point far below; scroll turns the wheel ---------- */
+.team{padding-block:0}
+.team .stage::before{content:"";position:absolute;inset:0;background:url(../assets/img/info/hand.webp) 50% calc(50% + (var(--p) - .5)*-80px)/cover;opacity:.55;
+  -webkit-mask:linear-gradient(#0000,#000 30%,#000 70%,#0000);mask:linear-gradient(#0000,#000 30%,#000 70%,#0000)}
+.team .stage>*{position:relative}
+.team .head{margin-bottom:0}
+.people{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:var(--wide);margin-inline:auto}
+.person{position:relative;aspect-ratio:1;border-radius:24px;overflow:hidden;background:var(--bed-2);color:var(--silver-50);box-shadow:0 40px 70px -30px #000}
+.person img{width:100%;height:100%;object-fit:cover}
+.person::after{content:"";position:absolute;inset:38% 0 0;background:linear-gradient(transparent,rgba(11,11,12,.92))}
+.person div{position:absolute;inset:auto 0 0;z-index:1;padding:clamp(1rem,2vw,1.75rem);display:grid;gap:.3rem}
+.person b{font-family:var(--f-head);font-weight:640;font-size:clamp(1.375rem,2.4vw,2.25rem);line-height:1.04;letter-spacing:-.035em}
+.person span{color:var(--mark);font-size:.9375rem}
+.fx .team{height:440vh}
+.fx .team .stage{justify-content:space-between;padding:12vh 0 13vh}
+.fx .team h2{font-size:clamp(2rem,min(5.2vw,8vh),4.75rem)}
+.fx .people{display:block;--s:clamp(200px,min(28vw,40vh),520px);--r:calc(.35 + var(--p)*4.65);height:var(--s);width:100%}
+.fx .person{position:absolute;left:50%;top:0;width:var(--s);margin-left:calc(var(--s)/-2);transform-origin:50% calc(var(--s)*3.5);
+  rotate:calc((var(--i) - var(--r))*var(--deg,24deg))}
+
+/* ---------- 11. differentiators: pinned; scroll opens one row at a time and rolls the counter ---------- */
+.why{padding-block:0;overflow-x:clip}
+.diffs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.diff{background:var(--bed-2);color:var(--silver-50);border-radius:22px;padding:clamp(1.25rem,2.6vh,2rem);display:flex;flex-direction:column;gap:.55rem}
+.diff>span{color:var(--mark);font-family:var(--f-edge);font-stretch:70%;font-weight:700;font-size:clamp(2rem,3vw,3rem);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-bottom:auto;padding-bottom:1rem}
+.diff h3{font-size:clamp(1.25rem,1.6vw,1.6rem);line-height:1.12}
+.diff p{color:var(--silver-400);font-size:clamp(.875rem,.98vw,1rem);line-height:1.5}
+.fx .diff{min-height:calc((100svh - 15rem) / 3)}
+.fx .why h2{font-size:clamp(2.25rem,4vw,4.25rem)}
+.fx .why{height:420vh}
+.fx .why .split{align-items:center;grid-template-columns:4fr 7fr;column-gap:clamp(3rem,6vw,7rem)}
+.fx .why .split>.head{position:static}
+.fx .diff{will-change:transform,opacity}
+
+/* ---------- 12. marquee that leans into the scroll ---------- */
+.marq{padding-block:clamp(2rem,6vh,4rem);overflow:hidden;white-space:nowrap}
+.marq div{display:inline-block;animation:marq 38s linear infinite;transform-origin:50% 100%}
+.marq p{display:inline-block;font-size:clamp(3.5rem,11vw,11rem);line-height:1;letter-spacing:-.045em;padding-right:.5em;
+  transform:skewX(calc(var(--vel)*-.12deg))}
+.marq p b{font-weight:inherit;color:var(--accent)}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ---------- 13. close: three circles converge ---------- */
+.close{padding-block:0;overflow-x:clip}   /* the circles start spread wide before they converge */
+.close .stage{flex-direction:row;align-items:center;justify-content:space-between;gap:4vw;width:var(--wide);margin-inline:auto;overflow:visible}
+.close h2{font-size:clamp(2rem,3.9vw,3.75rem);max-width:17ch}
+.close .copy{display:grid;gap:1.75rem;max-width:36rem}
+.links{display:flex;flex-wrap:wrap;gap:.75rem}
+.venn{--s:min(36vw,44vh);--k:calc(1 + (1 - var(--p))*1.6);flex:none;width:calc(var(--s)*1.7);height:calc(var(--s)*1.62);position:relative}
+.ring{position:absolute;left:50%;top:50%;width:var(--s);height:var(--s);margin:calc(var(--s)/-2);border-radius:50%;
+  border:1px solid rgba(255,165,74,.35);background:radial-gradient(circle at 50% 40%,rgba(255,165,74,.2),rgba(255,165,74,.05));
+  display:grid;place-content:center;text-align:center;gap:.5rem;translate:calc(var(--x)*var(--s)*var(--k)) calc(var(--y)*var(--s)*var(--k));
+  opacity:clamp(.25,calc(var(--p)*1.4),1);font-size:clamp(.75rem,1vw,.9375rem);color:var(--muted);line-height:1.5}
+.ring b{font-family:var(--f-head);font-weight:640;letter-spacing:-.02em;font-size:clamp(1rem,1.5vw,1.375rem);color:var(--page-ink)}
+.ring.a{--x:0;--y:-.31;padding-bottom:22%}
+.ring.b{--x:-.33;--y:.27;padding:18% 22% 0 0}
+.ring.c{--x:.33;--y:.27;padding:18% 0 0 22%}
+.core{position:absolute;left:50%;top:50%;width:calc(var(--s)*.2);aspect-ratio:1;translate:-50% -11.7%;border-radius:50%;overflow:hidden;
+  opacity:clamp(0,calc((var(--p) - .72)*5),1);scale:clamp(.4,calc(var(--p)*1.1),1)}
+.core img{height:100%;width:auto;max-width:none}
+.note{position:absolute;left:-4%;top:6%;font:500 clamp(1.5rem,2.6vw,2.5rem)/1.1 Caveat,cursive;rotate:-6deg;color:var(--page-ink);
+  opacity:clamp(0,calc((var(--p) - .85)*8),1)}
+footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line);color:var(--muted);font-size:.875rem}
+footer .wide{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+/* ---------- pinned layouts are desktop + motion only; below is the plain version ---------- */
+.fx .work,.fx .fan{height:var(--h,300vh)}
+.fx .close{height:230vh}
+.fx .partner{height:300vh}
+.fx .deck{position:relative;display:block;height:calc(var(--s)*.5714 + 8.5rem)}
+.fx .cop{position:absolute;left:50%;top:0;width:var(--s);margin-left:calc(var(--s)/-2);will-change:transform}
+.fx .cop:hover{z-index:10;scale:1.04}
+.fx .fan .stage{justify-content:center;gap:clamp(1.5rem,5vh,3.5rem);padding-top:4rem}
+html:not(.fx) .stage{position:static;height:auto;overflow:visible;padding-block:clamp(4rem,10vh,7rem)}
+html:not(.fx) .track{overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:1rem}
+html:not(.fx) .track>*{scroll-snap-align:center}
+@media (max-width:1023px){
+  .stats,.net,.models{grid-template-columns:1fr 1fr}
+  .wall{grid-template-columns:repeat(3,1fr)}
+  .tile:nth-child(n+19){display:none}
+  .case,.quote{width:84vw;height:auto;min-height:26rem}
+  .deck{grid-template-columns:1fr 1fr}
+  .split{grid-template-columns:1fr}.split>.head{position:static}
+  .close .stage{flex-direction:column-reverse;align-items:flex-start;gap:3rem}
+  .venn{--s:min(52vw,300px);align-self:center;margin-top:3rem}
+  .note{top:-12%}
+  .hold{height:0}
+  .hero small{display:none}
+}
+@media (max-width:1023px){
+  /* phones and tablets keep the motion, in layouts that fit a narrow screen */
+  .fx .work .wide h2{font-size:2rem}
+  .fx .fan{--s:min(86vw,52svh,440px)}
+  .fx .fan h2{font-size:2.25rem;max-width:12ch}
+  .fx .team .stage{padding:6.5rem 0 4svh;justify-content:flex-start;gap:clamp(2.5rem,7svh,4.5rem)}
+  /* closing: copy below, circles above with room for them to start spread out and converge */
+  .fx .close .stage{justify-content:flex-end;padding-top:9rem;gap:2rem}   /* column-reverse: flex-end packs from the top */
+  .fx .venn{--s:min(48vw,23svh,220px);--k:calc(1 + (1 - var(--p))*.9);margin-top:0}
+  .fx .close h2{font-size:1.875rem}
+  .fx .close .copy{gap:1.25rem}
+  .fx .people{--s:min(66vw,40svh);--deg:17deg}
+  .person::after{inset:56% 0 0}
+  .person div{padding:.9rem 1rem;gap:.15rem}
+  .person b{font-size:1.125rem}
+  .person span{font-size:.8125rem;line-height:1.3}
+  /* T.R.U.S.T.: the principle card on top, that phase's column of the framework below it */
+  .fx .trust{height:760vh}
+  .fx .tcards{left:16px;right:16px;width:auto;top:4.5rem;bottom:auto;height:min(37svh,320px)}
+  .fx .tcard{padding:1.1rem 1.25rem;gap:.35rem;border-radius:20px}
+  .fx .tcard>b{font-size:2.75rem;padding-bottom:.25rem}
+  .fx .tcard h3{font-size:1.3rem}
+  .fx .tcard .mean{font-size:.9375rem;line-height:1.35}
+  .fx .tcard dl{font-size:.8125rem;padding-top:.55rem;margin-top:.2rem;gap:.1rem}
+  .fx .tcard dt{font-size:.6875rem}
+  .fx .chart{left:16px;right:16px;top:calc(4.5rem + min(37svh,320px) + 12px);bottom:2svh;--lw:0px}
+  .fx .fw-labels{display:none}
+  .fx .fw em{display:block}
+  .fx .fw-view{-webkit-mask:none;mask:none}
+  /* these two read better as normal scrolling lists on a phone, each item animating in */
+  .fx .partner,.fx .why{height:auto}
+  .fx .partner .stage,.fx .why .stage{position:static;height:auto;overflow:visible;padding-block:clamp(4rem,10vh,7rem)}
+  .fx .why .split{grid-template-columns:1fr}
+  .fx .diff{min-height:0}
+  .fx.css-reveal .diff.rise{translate:56px 0}
+  .fx.css-reveal .diff.rise.in{translate:0 0}
+  .fx .models[data-on] .model.on{translate:0 0}
+  .model{min-height:0;padding:1.5rem}
+  .model h3{margin-top:.5rem}
+}
+@media (max-width:640px){
+  .net,.models,.diffs,.deck{grid-template-columns:1fr}
+  .people{grid-template-columns:1fr 1fr}
+  .phase{grid-template-columns:2rem 1fr}.phase h3,.phase div{grid-column:2}
+  .nav .btn{padding:.55rem 1rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a href="#top" aria-label="PeepalDesign, back to top"><img src="../assets/img/info/logo.webp" alt="PeepalDesign" width="400" height="80"></a>
+  <a class="btn" href="mailto:info@peepaldesign.com">Let's talk</a>
+</header>
+
+<div class="hero" id="top">
+  <div class="beam"></div>
+  <div class="hero-in">
+    <h1><span style="--i:0">Making</span> <span style="--i:1">AI</span> <span style="--i:2">Meaningful</span><br><span style="--i:3">by</span> <span style="--i:4"><b>DESIGN</b></span></h1>
+    <p>We partner with customer-obsessed companies to shape how humans and AI work together, designing intelligent products around human intent, judgement and trust to deliver meaningful outcomes.</p>
+  </div>
+  <small style="left:max(3vw,1rem)">Research-led since 2010</small>
+  <div class="cue" aria-hidden="true">Scroll</div>
+  <small style="right:max(3vw,1rem)">Bengaluru · Pune</small>
+
+</div>
+<div class="hold"></div>
+
+<main>
+
+<section class="ask" data-theme="light">
+  <div class="text">
+    <p class="big" data-words>AI is making products more intelligent. But is it making them more <em>meaningful</em> to the people using them?</p>
+    <p class="lede rise">We love partnering with companies that see AI as an opportunity to amplify human potential, not simply automate tasks. We design how humans and AI work together, keeping human intent, judgement and trust at the heart of intelligent experiences.</p>
+  </div>
+</section>
+
+<section data-theme="light" style="padding-top:0">
+  <div class="wide">
+    <div class="head"><span class="kicker rise">Who we are</span><h2 class="rise" style="--i:1">Research-Led. AI-Enabled.<br>Human-Centered.</h2></div>
+    <div class="stats">
+      <div class="stat rise"><b>2010</b><span>Co-founded</span></div>
+      <div class="stat rise" style="--i:1"><b data-n="1200">1200+</b><span>Research projects</span></div>
+      <div class="stat rise" style="--i:2"><b data-n="200">200+</b><span>Design projects</span></div>
+      <div class="stat rise" style="--i:3"><b data-n="10000">10000+</b><span>User interviews</span></div>
+    </div>
+    <div class="net">
+      <div class="rise"><figure><img src="../assets/img/info/logo-resight.webp" alt="Resight Global" style="height:58px" loading="lazy"></figure><h3>Powered by Resight Global</h3><p>China · Germany · India · Japan · Singapore · UK · US</p></div>
+      <div class="rise" style="--i:1"><figure><img src="../assets/img/info/logo-uxalliance.webp" alt="UXalliance" style="height:34px" loading="lazy"></figure><h3>Indian partner of UXalliance</h3><p>A network of 25 UX companies across the globe</p></div>
+      <div class="rise" style="--i:2"><figure><img src="../assets/img/info/logo-uxmasterclass.webp" alt="UX Masterclass" style="height:26px" loading="lazy"></figure><h3>UX Masterclass conference</h3><p>Hosts in 2014, 2020 and 2025</p></div>
+      <div class="rise" style="--i:3"><figure><img src="../assets/img/info/logo-iso.webp" alt="ISO 27001 certified" style="height:84px" loading="lazy"></figure><h3>ISO certified</h3><p>Bengaluru · Pune</p></div>
+    </div>
+  </div>
+</section>
+
+<section data-theme="dark">
+  <div class="wide">
+    <div class="head"><span class="kicker rise">AI-powered, enterprise &amp; digital products</span><h2 class="rise" style="--i:1;max-width:18ch">Designing Intelligent Experiences for Industry Leaders</h2></div>
+    <div class="wall" id="wall" aria-label="Clients we have worked with"></div>
+  </div>
+</section>
+
+<section class="work" data-theme="dark" data-pin>
+  <div class="stage">
+    <div class="wide"><span class="kicker">The work</span><h2 style="margin-top:1rem;max-width:22ch">Bringing intelligence into real human workflows</h2></div>
+    <div class="track">
+      <article class="case"><img src="../assets/img/info/sap.webp" alt="SAP Integration Suite screen"><div><span class="kicker">SAP</span><h3>iSuite Renovation | Joule</h3><p>Modernising critical Integration Suite workflows in Fiori, with conversational, task-focused experiences for Joule.</p></div></article>
+      <article class="case"><img src="../assets/img/info/infinity.webp" alt="Infinity Learn on desktop, tablet and phone"><div><span class="kicker">Infinity Learn</span><h3>AI-Driven EduTech</h3><p>Personalised learning for students preparing for NEET and JEE.</p></div></article>
+      <article class="case"><img src="../assets/img/info/aistudio.webp" alt="Bosch AI Studio image clustering screen"><div><span class="kicker">Bosch</span><h3>AI Studio | Intelligent Image Clustering</h3><p>Helping developers organise, classify and tag images to build richer datasets.</p></div></article>
+      <article class="case"><img src="../assets/img/info/revenera.webp" alt="Revenera Launch and Sell screen with the Ask Rio AI assistant"><div><span class="kicker">Flexera</span><h3>Revenera | AI-Based Software Monetization</h3><p>Simplifying how software is launched, licensed and sold, with AI assistance built into the workflow.</p></div></article>
+      <article class="case"><img src="../assets/img/info/genius.webp" alt="Genius learning experience on a classroom display"><div><span class="kicker">Genius</span><h3>AI-Powered Learning</h3><p>AI-enabled classroom experiences for TP Vision.</p></div></article>
+      <article class="case"><img src="../assets/img/info/kilkari.webp" alt="ARMMAN Kilkari gamified training screens for midwives"><div><span class="kicker">ARMMAN</span><h3>Kilkari | Gamified Learning</h3><p>Gamified mobile training for medical midwives, designed around accessibility, context and real human needs.</p></div></article>
+      <div class="quote"><p>AI creates possibilities. <span class="acc">Humans create meaning.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="fan" data-theme="light" data-pin>
+  <div class="stage">
+    <h2>PeepalDesign&rsquo;s AI tools</h2>
+    <div class="deck">
+      <article class="cop" tabindex="0" aria-label="View Accessibility Auditor screen larger"><img src="../assets/img/info/copilot1.webp" alt="Accessibility Auditor screen" loading="lazy"><div><span>01</span><h3>Accessibility Auditor</h3><p>AI-assisted accessibility auditing.</p></div></article>
+      <article class="cop" tabindex="0" aria-label="View UX Maturity Copilot screen larger"><img src="../assets/img/info/copilot3.webp" alt="UX Maturity Copilot screen" loading="lazy"><div><span>02</span><h3>UX Maturity Copilot</h3><p>UX maturity assessment.</p></div></article>
+      <article class="cop" tabindex="0" aria-label="View Design System GapScan screen larger"><img src="../assets/img/info/copilot2.webp" alt="Design System GapScan screen" loading="lazy"><div><span>03</span><h3>Design System GapScan</h3><p>Design system gap analysis.</p></div></article>
+      <article class="cop" tabindex="0" aria-label="View AI-Driven Concept Tester screen larger"><img src="../assets/img/info/copilot4.webp" alt="AI-Driven Concept Tester screen" loading="lazy"><div><span>04</span><h3>AI-Driven Concept Tester</h3><p>AI-driven concept testing.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section data-theme="light">
+  <div class="wide split">
+    <div class="head"><span class="kicker rise">How we do it</span><h2 class="rise" style="--i:1">From alignment to scale</h2><p class="lede rise" style="--i:2">A structured, human-led process where outputs are examined and decisions stay accountable.</p></div>
+    <div id="phases"></div>
+  </div>
+</section>
+
+<section data-theme="dark" style="padding-bottom:clamp(2rem,6vh,4rem)">
+  <div class="wide">
+    <div class="head" style="margin-bottom:0"><span class="pledge rise">Your data · Your IP · Our commitment</span>
+      <h2 class="big rise" style="--i:1">T.R.U.S.T.</h2><p class="lede rise" style="--i:2">AI enabled. Human led. Trust-built. Five principles we apply across the whole design lifecycle, from aligning on goals to scaling what works.</p></div>
+  </div>
+</section>
+
+<section class="trust" data-theme="dark" data-pin>
+  <div class="stage">
+    <div class="tcards">
+      <article class="tcard" style="--c:var(--t-t)"><b>T</b><h3>Transparent AI usage</h3><p class="mean">We are open about how we use AI and you are always in control.</p><dl><dt>Outcome · Faster delivery</dt><dd>AI accelerated research, exploration and documentation</dd></dl></article>
+      <article class="tcard" style="--c:var(--t-r)"><b>R</b><h3>Research Acceleration</h3><p class="mean">AI works alongside our experts to uncover insights faster and deeper.</p><dl><dt>Outcome · Higher quality</dt><dd>Evidence backed, consistent and tested</dd></dl></article>
+      <article class="tcard" style="--c:var(--t-u)"><b>U</b><h3>User-Centered Co-Creation</h3><p class="mean">Human creativity at the center. AI expands what's possible and we design what matters.</p><dl><dt>Outcome · Low risk</dt><dd>Governed process with built-in quality and safety</dd></dl></article>
+      <article class="tcard" style="--c:var(--t-s)"><b>S</b><h3>Safeguarded Validation</h3><p class="mean">Every output is tested, verified and refined. No hallucinations.</p><dl><dt>Outcome · Full transparency</dt><dd>Clear rationale, sources and audit trails</dd></dl></article>
+      <article class="tcard" style="--c:var(--t-t2)"><b>T</b><h3>Traceability &amp; Accountability</h3><p class="mean">Every decision, source and rationale is documented and traceable.</p><dl><dt>Outcome · Your data stays yours</dt><dd>Secure, private and never used to train public models</dd></dl></article>
+    </div>
+    <div class="chart" aria-label="The T.R.U.S.T. framework: activities, approach and deliverables for each principle, from Align to Scale">
+      <div class="fw-labels" aria-hidden="true"><span>Activities</span><span>How we do it</span><span>Deliverables</span><span>Outcome</span></div>
+      <div class="fw-view"><div class="fw" id="fw"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="partner" data-theme="dark" data-pin>
+  <div class="stage"><div class="wide">
+    <div class="head"><span class="kicker rise">Engagement models</span><h2 class="rise" style="--i:1">Ways We Partner</h2></div>
+    <div class="axis"><span>PeepalDesign led</span><span>Client led</span></div>
+    <div class="rail"><i></i></div>
+    <div class="models">
+      <article class="model rise"><span>1</span><h3>Dedicated AI Design Team</h3><p>Continuous design and research intervention from a blended AI-UX team: solution, visualization and interaction experts, researchers and more.</p></article>
+      <article class="model rise" style="--i:1"><span>2</span><h3>AI-UX Program</h3><p>Discrete design and research interventions or design engagements on demand, with blended consulting support.</p></article>
+      <article class="model rise" style="--i:2"><span>3</span><h3>Discovery Sprint</h3><p>Design consultants working from the client premise, guided and supported by PeepalDesign experts on a time and material basis.</p></article>
+      <article class="model rise" style="--i:3"><span>4</span><h3>Design Augmentation</h3><p>Design consultants working from the client premise, managed by the client team.</p></article>
+    </div>
+    <p class="between rise">← All creative ways in between →</p>
+  </div></div>
+</section>
+
+<section class="team" data-theme="dark" data-pin>
+  <div class="stage">
+    <div class="wide head"><span class="kicker rise">The people</span><h2 class="rise" style="--i:1;max-width:16ch">Meet the Team Behind the Intelligence</h2></div>
+    <div class="people">
+      <article class="person" style="--i:0"><img src="../assets/img/info/tara.webp" alt="" loading="lazy"><div><b>Tara Bosenick</b><span>Experience Transformation &amp; Inspiration</span></div></article>
+      <article class="person" style="--i:1"><img src="../assets/img/info/durgaprasad.webp" alt="" loading="lazy"><div><b>Durgaprasad Vemula</b><span>Strategy &amp; Business</span></div></article>
+      <article class="person" style="--i:2"><img src="../assets/img/info/mrudula.webp" alt="" loading="lazy"><div><b>Mrudula Srikanth</b><span>Research &amp; Insights</span></div></article>
+      <article class="person" style="--i:3"><img src="../assets/img/info/rajesh.webp" alt="" loading="lazy"><div><b>Rajesh Ghodke</b><span>Human-AI Experience</span></div></article>
+      <article class="person" style="--i:4"><img src="../assets/img/info/leena.webp" alt="" loading="lazy"><div><b>Leena Jain</b><span>Insight, AI Expert</span></div></article>
+      <article class="person" style="--i:5"><img src="../assets/img/info/sukhbir.webp" alt="" loading="lazy"><div><b>Sukhbir Singh</b><span>Experience, AI Expert</span></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="why" data-theme="light" data-pin>
+  <div class="stage"><div class="wide split">
+    <div class="head"><span class="kicker">AI native agency advantage</span><h2>The Core Differentiators</h2><p class="lede">We turn AI ambition into trusted human-AI experiences that people adopt and businesses can scale.</p></div>
+    <div class="diffs">
+      <article class="diff rise"><span>01</span><h3>Research-led AI opportunity discovery</h3><p>We identify where AI can create real user and business value, not just where AI can be added.</p></article>
+      <article class="diff rise"><span>02</span><h3>Human-AI experience design</h3><p>We design copilots, agents, conversational interfaces, multimodal journeys and AI-powered workflows that fit naturally into how people work.</p></article>
+      <article class="diff rise"><span>03</span><h3>Trust-built by design</h3><p>We design transparency, explainability, control, validation and accountability into AI experiences from the beginning.</p></article>
+      <article class="diff rise"><span>04</span><h3>Evidence before investment</h3><p>We validate AI concepts, prototypes, user confidence, adoption risks and business relevance before clients scale engineering investment.</p></article>
+      <article class="diff rise"><span>05</span><h3>Mature UX delivery, AI-native methods</h3><p>We combine 15 years of research and product design maturity with AI-enabled discovery, design, validation and governance frameworks.</p></article>
+      <article class="diff rise"><span>06</span><h3>Flexible partnership models</h3><p>From AI discovery sprints to dedicated AI design teams, we support clients at every stage of their AI product maturity.</p></article>
+    </div>
+  </div></div>
+</section>
+
+<div class="marq" data-theme="dark" aria-hidden="true"><div>
+  <p>Making AI meaningful by <b>design</b> ·</p><p>Making AI meaningful by <b>design</b> ·</p><p>Making AI meaningful by <b>design</b> ·</p><p>Making AI meaningful by <b>design</b> ·</p>
+</div></div>
+
+<section class="close" data-theme="dark" data-pin>
+  <div class="stage">
+    <div class="copy">
+      <h2>Where Human Insight Meets AI Intelligence to Create Business Impact</h2>
+      <p class="lede">We don't just design what AI can do. We design how it creates value for people.</p>
+      <div class="links"><a class="btn" href="mailto:info@peepaldesign.com">info@peepaldesign.com</a><a class="btn" href="https://www.peepaldesign.com">www.peepaldesign.com</a></div>
+    </div>
+    <div class="venn" role="img" aria-label="Human insight, AI intelligence and business impact overlap to create AI experiences people trust">
+      <div class="ring a"><b>Human Insight</b>User research<br>Behavioral understanding<br>Context of use</div>
+      <div class="ring b"><b>AI Intelligence</b>LLMs · Agents<br>Automation<br>Recommendations<br>Prediction</div>
+      <div class="ring c"><b>Business Impact</b>Adoption · Efficiency<br>Revenue · Retention<br>Differentiation</div>
+      <div class="core"><img src="../assets/img/info/logo.webp" alt=""></div>
+      <div class="note">AI Experiences<br>People Trust</div>
+    </div>
+  </div>
+</section>
+
+<dialog class="lb" aria-label="Enlarged screen"><img alt=""><p></p></dialog>
+<footer><div class="wide"><span>© PeepalDesign. Bengaluru · Pune.</span><span>Part of Resight Global · Member of UXalliance</span></div></footer>
+</main>
+
+<!-- motion libraries, exact versions; if either fails to load the page falls back to its own CSS reveal and native scroll -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const ease = t => t * t * (3 - 2 * t);
+const root = document.documentElement;
+
+// ---- content that is only data: process phases and logo wall ----
+const PHASES = [
+  ['Align', 'Business Vision Workshop|AI disclosure policies and tool inventory|Client approval gates for AI use|Data & Ecosystem Review|Clear segregation of your data', 'AI Opportunity Charter|Business Objectives|AI Readiness Map|Success KPIs'],
+  ['Discover', 'User Research|Workflow Analysis|Job-To-Be-Done Mapping|Decision Journey Mapping|Pain Point Analysis', 'Voice of User|Workflow Maps|Opportunity Areas|AI Use Cases|Adoption Risks'],
+  ['Define', 'AI Opportunity Mapping|Use Case Prioritization|Value vs Feasibility Matrix|Human vs AI Responsibility Mapping', 'Prioritized AI Use Cases|Human-AI Interaction Model|AI Roadmap|Risk Assessment'],
+  ['Design', 'Copilot Design|Agent Design|Conversational Design|Prompt Strategy|Multimodal Experience Design|Explainability Design', 'AI Experience Concepts|Interaction Models|Conversation Flows|Trust Patterns|Wireframes|Prototypes'],
+  ['Validate', 'Prototype Testing|Human-AI Interaction Testing|Trust Testing|Explainability Testing|Hallucination Impact Review|Adoption Testing', 'Usability Report|Trust Assessment|Adoption Assessment|Design Improvements'],
+  ['Scale', 'Design System Integration|Governance Framework|AI Pattern Library|Continuous Learning|Performance Optimization', 'AI Design System|Governance Model|AI UX Guidelines|Optimization Roadmap'],
+];
+const li = s => s.split('|').map(x => `<li>${x.replace('&', '&amp;')}</li>`).join('');
+document.getElementById('phases').innerHTML = PHASES.map(([n, a, d], i) =>
+  `<article class="phase rise"><span>0${i + 1}</span><h3>${n}</h3><div><h4>Activities</h4><ul>${li(a)}</ul></div><div><h4>Deliverables</h4><ul>${li(d)}</ul></div></article>`).join('');
+
+const PC = [['T', 'var(--t-t)', 'Transparent AI usage', 'Faster delivery', 'AI accelerated research, exploration and documentation'],
+  ['R', 'var(--t-r)', 'Research Acceleration', 'Higher quality', 'Evidence backed, consistent and tested'],
+  ['U', 'var(--t-u)', 'User-Centered Co-Creation', 'Low risk', 'Governed process with built-in quality and safety'],
+  ['S', 'var(--t-s)', 'Safeguarded Validation', 'Full transparency', 'Clear rationale, sources and audit trails'],
+  ['T', 'var(--t-t2)', 'Traceability & Accountability', 'Your data stays yours', 'Secure, private and never used to train public models']];
+const SUB = [0, 1, 2, 2, 3, 4], SUBC = ['var(--t-t)', 'var(--t-r)', 'var(--t-u2)', 'var(--t-u3)', 'var(--t-s)', 'var(--t-t2)'];   // phase column -> principle, phase colours
+document.getElementById('fw').innerHTML =
+  PC.map(([l, c, n, ot, od], p) => { const span = `grid-column:${SUB.indexOf(p) + 1}/span ${SUB.filter(x => x === p).length}`;
+    return `<div class="fw-p" data-p="${p}" style="--c:${c};${span};grid-row:1"><b>${l}</b><span>${n.replace('&', '&amp;')}</span></div>` +
+      `<div class="fw-o" data-p="${p}" style="--c:${c};${span};grid-row:5"><b>${ot}</b><p>${od}</p></div>`; }).join('') +
+  PHASES.map(([n, a, d], i) => { const st = `--c:${SUBC[i]};grid-column:${i + 1}`;
+    return `<div class="fw-a" data-p="${SUB[i]}" data-c="${i}" style="${st};grid-row:2"><em>Activities</em><ul>${li(a)}</ul></div>` +
+      `<div class="fw-h${i % 2 ? ' l' : ''}" data-p="${SUB[i]}" data-c="${i}" style="${st};grid-row:3"><span>${n}</span></div>` +
+      `<div class="fw-d" data-p="${SUB[i]}" data-c="${i}" style="${st};grid-row:4"><em>Deliverables</em><ul>${li(d)}</ul></div>`; }).join('');
+
+const LOGOS = 'Meta|Google|Bosch|SAP|TP Vision|Blaize|Flexera|Infinity Learn|Amazon|Amadeus|Veritas|Ansys|Microsoft|Qualcomm|Bajaj|Infosys|Toyota|Sony|Philips|Informatica|Flipkart|FundsIndia|Titan|Asian Paints|Booking.com|Duroflex|Biorad Medisys|Reliance Life Insurance|Bobcat|AXA'.split('|');
+const src = i => `../assets/img/info/logo${String(i + 1).padStart(2, '0')}.webp`;
+const wall = document.getElementById('wall'), TILES = 24;
+wall.innerHTML = LOGOS.slice(0, TILES).map((n, i) => `<div class="tile rise" style="--i:${i % 6}"><img src="${src(i)}" alt="${n}" loading="lazy"><img alt="" loading="lazy"></div>`).join('');
+const tiles = $$('.tile', wall), shown = tiles.map((_, i) => i);
+setInterval(() => {                       // swap one tile to a logo that is not on the wall
+  if (document.hidden) return;
+  const t = Math.floor(Math.random() * TILES), free = LOGOS.map((_, i) => i).filter(i => !shown.includes(i));
+  const next = free[Math.floor(Math.random() * free.length)], el = tiles[t];
+  const hidden = el.children[el.classList.contains('b') ? 0 : 1];
+  hidden.src = src(next); hidden.alt = LOGOS[next];
+  el.children[el.classList.contains('b') ? 1 : 0].alt = '';
+  el.classList.toggle('b'); shown[t] = next;
+}, 1800);
+
+// ---- words that light up ----
+const wordsEl = document.querySelector('[data-words]');
+wordsEl.innerHTML = wordsEl.innerHTML.replace(/(<[^>]+>)|([^\s<]+)/g, (m, tag) => tag ? tag : `<span class="w">${m}</span>`);
+const words = $$('.w', wordsEl);
+
+// ---- scroll motion runs whenever motion is allowed; some pinned layouts change shape below 1024px ----
+const mq = matchMedia('(prefers-reduced-motion:no-preference)'), dq = matchMedia('(min-width:1024px)');
+const hero = document.querySelector('.hero'), nav = document.querySelector('.nav'), main = document.querySelector('main');
+const themed = $$('[data-theme]', main), pins = $$('[data-pin]'), views = $$('[data-view]');
+const cops = $$('.cop'), models = document.querySelector('.models'), rail = document.querySelector('.rail');
+const work = document.querySelector('.work'), track = document.querySelector('.track'), fan = document.querySelector('.fan');
+const why = document.querySelector('.why'), diffs = $$('.diff');
+const trustSec = document.querySelector('.trust'), tcardsEl = document.querySelector('.tcards'), tcards = $$('.tcard');
+const chart = document.querySelector('.chart'), fwView = document.querySelector('.fw-view'), fw = document.getElementById('fw');
+const fwCells = $$('[data-p]', fw), fwLabels = $$('.fw-labels span');
+let FWR = null;                                                  // framework geometry in unscaled px; reset on layout
+function fwRects() {
+  const box = cs => { const l = Math.min(...cs.map(c => c.offsetLeft)), t = Math.min(...cs.map(c => c.offsetTop));
+    return [l - 26, t - 18, Math.max(...cs.map(c => c.offsetLeft + c.offsetWidth)) - l + 52, Math.max(...cs.map(c => c.offsetTop + c.offsetHeight)) - t + 36]; };
+  const body = fwCells.filter(c => !c.matches('.fw-p,.fw-o'));
+  // desktop: one stop per principle, then the whole framework; phones: one stop per phase column (no full view)
+  const R = desk ? PC.map((_, p) => box(body.filter(c => +c.dataset.p === p))) : PHASES.map((_, j) => box(body.filter(c => +c.dataset.c === j)));
+  if (desk) R.push(box(fwCells));
+  const rows = ['.fw-a', '.fw-h', '.fw-d', '.fw-o'].map(q => { const e = fw.querySelector(q); return e.offsetTop + e.offsetHeight / 2; });
+  return { R, rows };
+}
+function trustFrame(p, vh) {
+  // five stops (one per principle) then the full framework; each stop holds, then eases to the next
+  const x = p * 5.5, k = Math.floor(x), m = Math.min(5, k + ease(clamp((x - k - .35) / .65)));
+  const first = desk ? [0, 1, 2, 3, 4] : [0, 1, 2, 4, 5];       // the stop at which each principle's card arrives
+  const tAt = i => i === 0 ? 1 : clamp(m - (first[i] - 1));
+  tcards.forEach((c, i) => {                                     // each card rises over the last; the covered one recedes
+    const t = tAt(i), d = i < 4 ? tAt(i + 1) : 0;
+    c.style.transform = `translateY(${(1 - t) * vh - d * 18}px) scale(${1 - d * .05})`;
+    c.style.filter = `brightness(${1 - d * .55})`;
+  });
+  const out = desk ? ease(clamp(m - 4)) : 0;                     // desktop last step: cards leave, the framework takes the full width
+  tcardsEl.style.transform = `translateX(${-out * (tcardsEl.offsetWidth + innerWidth * .05)}px)`;
+  tcardsEl.style.opacity = 1 - out;
+  const gutter = Math.max(innerWidth * .03, 16);
+  chart.style.left = desk ? (gutter + (1 - out) * (tcardsEl.offsetWidth + 32)) + 'px' : '';
+  // only the current principle's column is shown: it rises in as its card arrives and lifts away as the next comes;
+  // the principle and outcome rows (already on the cards) appear only in the full framework at the end
+  fwCells.forEach(c => {
+    const q = desk ? +c.dataset.p : +c.dataset.c, extra = c.matches('.fw-p,.fw-o');
+    const near = clamp(1 - Math.abs(m - q) * 1.6), vis = extra ? out : Math.max(near, out);
+    c.style.opacity = vis;
+    c.style.translate = `0 ${extra ? (1 - out) * 24 : (1 - vis) * (m < q ? 40 : -40)}px`;
+    c.style.setProperty('--f', extra ? 0 : near * (1 - out));
+  });
+  const { R, rows } = FWR ||= fwRects();
+  const a = R[Math.floor(m)], b = R[Math.ceil(m)], f = m - Math.floor(m);
+  const [rx, ry, rw, rh] = a.map((v, i) => v + (b[i] - v) * f);
+  const PW = fwView.clientWidth, PH = fwView.clientHeight, sc = Math.min(PW / rw, PH / rh, desk ? 1.35 : 1.2);
+  const tx = PW / 2 - (rx + rw / 2) * sc;                          // the focused column always sits in the centre
+  const ty = PH / 2 - (ry + rh / 2) * sc;
+  fw.style.transform = `translate(${tx}px,${ty}px) scale(${sc})`;
+  fwLabels.forEach((l, i) => { l.style.top = (ty + rows[i] * sc) + 'px'; if (i === 3) l.style.opacity = out; });
+}
+function trustReset() {
+  FWR = null;
+  [...tcards, tcardsEl, chart, fw, ...fwCells].forEach(e => { e.style.transform = ''; e.style.filter = ''; e.style.opacity = ''; e.style.left = ''; e.style.translate = ''; e.style.removeProperty('--f'); });
+}
+// the headings of the pinned sections develop in too, so no section arrives already standing
+$$('.work .stage > .wide > *, .fan .stage > h2, .why .head > *, .close .copy > *').forEach(e => e.classList.add('rise'));
+const GS = !!(window.gsap && window.ScrollTrigger);
+if (!GS) root.classList.add('css-reveal');
+let pending = GS ? [] : $$('.rise'), lastY = -1, vel = 0, fx = false, desk = true;
+
+function layout() {
+  fx = mq.matches; desk = dq.matches; root.classList.toggle('fx', fx); root.classList.toggle('desk', desk);
+  if (!desk) diffs.forEach(d => { d.style.transform = ''; d.style.opacity = ''; });
+  work.style.setProperty('--h', innerHeight + Math.max(0, track.scrollWidth - innerWidth) + 'px');
+  fan.style.setProperty('--h', innerHeight * 3.4 + 'px');
+  if (!fx) { track.style.transform = ''; cops.forEach(c => c.style.transform = ''); diffs.forEach(d => { d.style.transform = ''; d.style.opacity = ''; }); trustReset(); words.forEach(w => w.style.opacity = ''); pending.forEach(e => e.classList.add('in')); pending = []; }
+  lastY = -1; FWR = null;
+  if (GS) { clearTimeout(layout.t); layout.t = setTimeout(() => ScrollTrigger.refresh(), 200); }   // section heights move as fonts and images land
+}
+function countUp(el) {
+  const n = +el.dataset.n, t0 = performance.now();
+  (function tick(t) { const k = clamp((t - t0) / 2200); el.textContent = Math.round(n * (1 - Math.pow(1 - k, 4))) + '+'; if (k < 1) requestAnimationFrame(tick); })(t0);
+}
+function frame() {
+  if (!GS) requestAnimationFrame(frame);           // with GSAP, the shared ticker calls this right after Lenis moves the page
+  const y = scrollY, vh = innerHeight;
+  vel += ((y - (lastY < 0 ? y : lastY)) - vel) * .18;           // smoothed scroll speed for the marquee lean
+  root.style.setProperty('--vel', clamp(vel, -60, 60).toFixed(2));
+  if (y === lastY) return; lastY = y;
+
+  nav.toggleAttribute('data-scrolled', y > 40);                  // keyed to scrollY, never to an element the header moves
+  let theme = 'dark';
+  for (const s of themed) { const r = s.getBoundingClientRect(); if (r.top <= vh / 2 && r.bottom > vh / 2) { theme = s.dataset.theme; break; } }
+  if (root.dataset.theme !== theme) root.dataset.theme = theme;
+  if (!fx) return;
+
+  root.style.setProperty('--hp', clamp(y / (vh * .55)).toFixed(3));
+  pending = pending.filter(e => {                                // rect check per frame: IntersectionObserver lags fast flicks
+    if (e.getBoundingClientRect().top > vh * .9) return true;
+    e.classList.add('in'); const n = e.querySelector('[data-n]'); if (n) countUp(n); return false;
+  });
+  const wr = wordsEl.getBoundingClientRect(), wp = clamp((vh * .85 - wr.top) / (vh * .7)) * (words.length + 2);
+  words.forEach((w, i) => w.style.opacity = clamp(wp - i, .14, 1));
+
+  for (const s of pins) { const r = s.getBoundingClientRect(); s.style.setProperty('--p', clamp(-r.top / (r.height - vh)).toFixed(4)); }
+  for (const s of views) { const r = s.getBoundingClientRect(); s.style.setProperty('--p', clamp((vh * .6 - r.top) / (vh * .7)).toFixed(4)); }
+  const P = el => +el.style.getPropertyValue('--p');
+
+  track.style.transform = `translate3d(${-P(work) * (track.scrollWidth - innerWidth)}px,0,0)`;
+
+  const ts = cops.map((_, i) => ease(clamp(P(fan) * 5.2 - i - .4))), n = ts.reduce((a, b) => a + b, 0);
+  const cw = cops[0].offsetWidth, gap = Math.min(cw * .62, (innerWidth * .94 - cw) / 3);                          // overlapping row that re-centres as each card arrives
+  cops.forEach((c, i) => c.style.transform = `translate(${(i - (Math.max(n, 1) - 1) / 2) * gap}px,${(1 - ts[i]) * vh}px) rotate(${(i - 1.5) * 2.5 * ts[i]}deg)`);
+
+  trustFrame(P(trustSec), vh);
+  // differentiators: each card slides in from the right and stops in an overlapping row that starts at the centre line
+  // differentiators: each row slides in from the right into a plain vertical list
+  if (desk) {
+    const dts = diffs.map((_, i) => ease(clamp(P(why) * 7 - i - .3)));
+    diffs.forEach((d, i) => { d.style.transform = `translateX(${(1 - dts[i]) * innerWidth * .6}px)`; d.style.opacity = dts[i]; });
+  }
+  const mods = $$('.model', models);
+  const on = desk ? Math.min(3, Math.floor(P(models.closest('section')) * 4))       // pinned: each quarter of the scroll lights the next model
+    : mods.reduce((b, m, i) => { const r = m.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - vh * .55); return d < b[1] ? [i, d] : b; }, [0, 1e9])[0];
+  models.dataset.on = on; mods.forEach((m, i) => m.classList.toggle('on', i === on));
+  rail.style.setProperty('--p', desk ? P(models.closest('section')) : on / 3);
+}
+// ---- motion libraries: Lenis eases the scroll itself, GSAP develops each block in as it arrives ----
+let lenis = null;
+if (GS && mq.matches) {
+  gsap.registerPlugin(ScrollTrigger);
+  if (window.Lenis) {
+    // wheel and trackpad glide to rest instead of stepping; touch keeps the phone's native scroll
+    lenis = new Lenis({ lerp: .085, wheelMultiplier: .9 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+      const t = a.getAttribute('href') === '#top' ? 0 : document.querySelector(a.getAttribute('href'));
+      if (t === null) return; e.preventDefault(); lenis.scrollTo(t, { duration: 1.6 });
+    }));
+  }
+  gsap.ticker.add(frame);
+  // "develop": the main site's reveal, a faint, soft frame resolving to full, never a pop from nothing.
+  // Longer and further than the old 0.9s / 32px slide, on an exponential ease so it lands gently.
+  const reveal = $$('.rise').filter(e => !(dq.matches && e.matches('.diff')));   // desktop differentiators are scroll-scrubbed already
+  reveal.forEach(e => gsap.set(e, { autoAlpha: 0, filter: 'blur(8px)', ...(e.matches('.diff') ? { x: 64 } : { y: 64 }) }));
+  ScrollTrigger.batch(reveal, {
+    start: 'top 90%', once: true, interval: .12, batchMax: 6,
+    onEnter: els => {
+      gsap.to(els, { autoAlpha: 1, x: 0, y: 0, filter: 'blur(0px)', duration: 1.5, ease: 'expo.out', stagger: .11,
+        clearProps: 'transform,filter,opacity,visibility' });   // hand back to the CSS states (dimmed models, lifted cards)
+      els.forEach(e => { e.classList.add('in'); const n = e.querySelector('[data-n]'); if (n) countUp(n); });
+    },
+  });
+} else if (GS) {
+  gsap.ticker.add(frame);
+}
+const lb = document.querySelector('.lb');
+lb.addEventListener('click', () => lb.close());
+lb.addEventListener('close', () => lenis?.start());
+cops.forEach(c => {
+  const open = () => { lenis?.stop(); const i = c.querySelector('img'); lb.querySelector('img').src = i.src; lb.querySelector('img').alt = i.alt; lb.querySelector('p').textContent = c.querySelector('h3').textContent; lb.showModal(); };
+  c.addEventListener('click', open);
+  c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+});
+addEventListener('resize', layout); mq.addEventListener('change', layout); dq.addEventListener('change', layout);
+new ResizeObserver(layout).observe(main);   // fonts and images shift sections without a scroll event
+layout(); if (!GS) frame();
+</script>
+</body>
+</html>
